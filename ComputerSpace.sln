@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerSpace.Server", "ComputerSpace\Server\ComputerSpace.Server.csproj", "{6686FBD0-7E3E-4ECC-9AF0-E8026A9CF680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerSpace.Server", "ComputerSpace\Server\ComputerSpace.Server.csproj", "{6686FBD0-7E3E-4ECC-9AF0-E8026A9CF680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerSpace.Client", "ComputerSpace\Client\ComputerSpace.Client.csproj", "{C04DEDE5-D8C4-45A0-9C91-B7DD8492438B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerSpace.Client", "ComputerSpace\Client\ComputerSpace.Client.csproj", "{C04DEDE5-D8C4-45A0-9C91-B7DD8492438B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerSpace.Shared", "ComputerSpace\Shared\ComputerSpace.Shared.csproj", "{A9E064A9-AB67-4E63-B6D5-975132E4A3CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputerSpace.Shared", "ComputerSpace\Shared\ComputerSpace.Shared.csproj", "{A9E064A9-AB67-4E63-B6D5-975132E4A3CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
