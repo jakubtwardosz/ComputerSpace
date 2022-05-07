@@ -1,3 +1,4 @@
+global using ComputerSpace.Shared;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
