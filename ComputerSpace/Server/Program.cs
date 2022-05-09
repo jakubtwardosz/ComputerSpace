@@ -1,6 +1,6 @@
 global using ComputerSpace.Shared;
+global using ComputerSpace.Server.Data;
 global using Microsoft.EntityFrameworkCore;
-using ComputerSpace.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
