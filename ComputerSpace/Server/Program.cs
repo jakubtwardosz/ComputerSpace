@@ -1,6 +1,7 @@
 global using ComputerSpace.Shared;
 global using ComputerSpace.Server.Data;
 global using Microsoft.EntityFrameworkCore;
+global using ComputerSpace.Server.Services.ProductService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
