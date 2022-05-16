@@ -43,6 +43,12 @@
                     Id = 3,
                     Name = "Smartfony",
                     Url = "smartfony"
+                },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Programy",
+                    Url = "programy"
                 });
 
 
@@ -127,6 +133,24 @@
                     ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2022/5/pr_2022_5_5_14_5_52_38_05.jpg",
 
                     CategoryId = 3,
+                },
+                new Product
+                {
+                    Id = 10,
+                    Title = "Microsoft Office Home & Business 2021",
+                    Description = "Microsoft Office Home & Business 2021 to dobrze znane narzędzia zwiększające produktywność, które udoskonaliliśmy, aby jeszcze lepiej pomagać Ci organizować pracę, tworzyć treści i współpracować.",
+                    ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/10/pr_2021_10_13_14_20_18_226_00.jpg",
+
+                    CategoryId = 4,
+                },
+                new Product
+                {
+                    Id = 11,
+                    Title = "NortonLifeLock 360 Standard 1st. (12m)",
+                    Description = "Produkt Norton 360 oferuje komputerowi PC, Mac®, smartfonowi lub tabletowi ochronę w czasie rzeczywistym przed oprogramowaniem wymuszającym okup, wirusami, programami typu spyware, wyłudzaniem danych i innymi zagrożeniami pochodzącymi z Internetu, monitoruje nieautoryzowany ruch i blokuje go oraz pomaga chronić dane osobowe i finansowe w Internecie.",
+                    ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2020/3/pr_2020_3_3_10_4_35_199_00.jpg",
+
+                    CategoryId = 4,
                 });
 
             modelBuilder.Entity<ProductVariant>().HasData(
