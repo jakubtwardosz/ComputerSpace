@@ -18,10 +18,10 @@ else
             @if (product.Variants != null && product.Variants.Count > 1)
             {
                 <div class="mb-3">
-                    <select class="form-select" @bind="currentTypeId">
+                    <select class="form-control" @bind="currentTypeId">
                         @foreach (var variant in product.Variants)
                         {
-                           <option value="@variant.ProductId">
+                           <option value="@variant.ProductTypeId">
                                @variant.ProductType.Name
                            </option>
                         }
@@ -40,7 +40,7 @@ else
                 <h4 class="price">
                     @GetSelectedVariant().Price zł
                 </h4>
-            }
+            }            
         </div>
     </div>
 }
