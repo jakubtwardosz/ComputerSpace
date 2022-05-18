@@ -61,6 +61,7 @@
                     Description = "Biznesowy laptop Lenovo ThinkBook 15 to styl i wydajność w klasie premium.",
                     ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/10/pr_2021_10_26_17_34_34_784_00.jpg",
                     CategoryId = 1,
+                    Featured = true
                 },
                 new Product
                 {
@@ -77,8 +78,8 @@
                     Title = "HP Neverstop 1200w WiFi Mono USB LCD",
                     Description = "HP Neverstop 1200w to idealne rozwiązanie, gdy musisz szybko wydrukować bądź skopiować dokumenty przed wyjściem albo prowadzisz małą firmę i potrzebujesz od czasu do czasu skorzystać ze skanera.",
                     ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2019/7/pr_2019_7_8_13_16_8_962_06.jpg",
-
                     CategoryId = 2,
+                    Featured = true
                 },
                 new Product
                 {
@@ -86,8 +87,8 @@
                     Title = "Xiaomi Redmi 9C NFC 3/64GB Midnight Grey",
                     Description = "Wybierz Xiaomi Redmi 9C NFC szary i poczuj różnicę. Duży ekran o przekątnej 6,53” wyświetli obraz bogaty w żywe kolory. Świetne zdjęcia niezależnie od sytuacji wykonasz przy użyciu systemu 2 aparatów umieszczonych na tylnej obudowie.",
                     ImageUrl = "https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2021/7/pr_2021_7_8_9_2_28_148_00.jpg",
-
                     CategoryId = 3,
+                    Featured = true
                 },
                 new Product
                 {
