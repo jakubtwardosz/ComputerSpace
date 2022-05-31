@@ -11,6 +11,15 @@ namespace ComputerSpace.Server.Services.AuthService
             _context = context;
         }
 
+        public async Task<ServiceResponse<string>> Login(string email, string password)
+        {
+            var response = new ServiceResponse<string>
+            {
+                Data = "token"
+            };
+            return response;
+        }
+
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
             if (await UserExists(user.Email))
