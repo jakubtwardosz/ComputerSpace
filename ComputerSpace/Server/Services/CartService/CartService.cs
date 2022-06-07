@@ -1,13 +1,20 @@
-﻿namespace ComputerSpace.Server.Services.CartService
+﻿using System.Security.Claims;
+
+namespace ComputerSpace.Server.Services.CartService
 {
     public class CartService : ICartService
     {
         private readonly DataContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CartService(DataContext context)
+        public CartService(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
         public async Task<ServiceResponse<List<CartProductResponse>>> GetCartProducts(List<CartItem> cartItems)
         {
             var result = new ServiceResponse<List<CartProductResponse>>
@@ -54,15 +61,15 @@
             return result;
         }
 
-        public async Task<ServiceResponse<List<CartProductResponse>>> StoreCartItems(List<CartItem> cartItems, int userId)
+        public async Task<ServiceResponse<List<CartProductResponse>>> StoreCartItems(List<CartItem> cartItems)
         {
-            cartItems.ForEach(cartItem => cartItem.UserId = userId);
+            cartItems.ForEach(cartItem => cartItem.UserId = GetUserId());
             _context.CartItems.AddRange(cartItems);
             await _context.SaveChangesAsync();
 
             return await GetCartProducts(
                 await _context.CartItems
-                .Where(ci => ci.UserId == userId).ToListAsync());
+                .Where(ci => ci.UserId == GetUserId()).ToListAsync());
         }
     }
 }
