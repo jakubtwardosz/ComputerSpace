@@ -20,7 +20,7 @@ namespace ComputerSpace.Client.Services.CartService
 
         public async Task AddToCart(CartItem cartItem)
         {
-            if((await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated)
+            if (await IsUserAuthenticated())
             {
                 Console.WriteLine("User is authenticated");
             }
@@ -45,7 +45,7 @@ namespace ComputerSpace.Client.Services.CartService
             {
                 sameItem.Quantity += cartItem.Quantity;
             }
-            
+
             await _localStorage.SetItemAsync("cart", cart);
             OnChange.Invoke();
         }
@@ -126,6 +126,11 @@ namespace ComputerSpace.Client.Services.CartService
                 cartItem.Quantity = product.Quantity;
                 await _localStorage.SetItemAsync("cart", cart);
             }
+        }
+
+        private async Task<bool> IsUserAuthenticated()
+        {
+            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
         }
     }
 }
