@@ -141,10 +141,5 @@ namespace ComputerSpace.Server.Services.AuthService
 
             return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
         }
-
-        public int GetUserId()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
