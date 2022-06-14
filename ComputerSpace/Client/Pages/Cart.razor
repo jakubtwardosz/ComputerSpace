@@ -75,7 +75,7 @@ else
 
     private async Task PlaceOrder()
     {
-        string url = OrderService.PlaceOrder();
+        string url = await OrderService.PlaceOrder();
         NavigationManager.NavigateTo(url);
     }
 }

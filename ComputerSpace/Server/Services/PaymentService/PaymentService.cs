@@ -48,8 +48,10 @@ namespace ComputerSpace.Server.Services.PaymentService
                 },
                 LineItems = lineItem,
                 Mode = "payment",
-                SuccessUrl = "https//localhost:7056/order-success",
-                CancelUrl = "https//localhost:7056/cart"
+                SuccessUrl = "https://localhost:7056/order-success",
+                CancelUrl = "https://localhost:7056/cart"
+
+
             };
             var service = new SessionService();
             Session session = service.Create(options);
