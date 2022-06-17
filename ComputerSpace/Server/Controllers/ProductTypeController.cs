@@ -7,11 +7,11 @@ namespace ComputerSpace.Server.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
-    public class ProductTypesController : ControllerBase
+    public class ProductTypeController : ControllerBase
     {
         private readonly IProductTypeService _productTypeService;
 
-        public ProductTypesController(IProductTypeService productTypeService)
+        public ProductTypeController(IProductTypeService productTypeService)
         {
             _productTypeService = productTypeService;
         }

@@ -4,16 +4,17 @@
     {
         private readonly DataContext _context;
 
-        public ProductTypeService(DataContext dataContext)
+        public ProductTypeService(DataContext context)
         {
-            _context = dataContext;
+            _context = context;
         }
 
         public async Task<ServiceResponse<List<ProductType>>> GetProductTypes()
         {
             var productTypes = await _context.ProductTypes.ToListAsync();
             return new ServiceResponse<List<ProductType>> { Data = productTypes };
-
         }
+
     }
 }
+ 
