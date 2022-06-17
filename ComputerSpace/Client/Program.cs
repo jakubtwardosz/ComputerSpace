@@ -5,6 +5,7 @@ global using ComputerSpace.Client.Services.CategoryService;
 global using ComputerSpace.Client.Services.AuthService;
 global using ComputerSpace.Client.Services.OrderService;
 global using ComputerSpace.Client.Services.AddressService;
+global using ComputerSpace.Client.Services.ProductTypeService;
 global using Microsoft.AspNetCore.Components.Authorization;
 
 using ComputerSpace.Client;
@@ -26,6 +27,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
