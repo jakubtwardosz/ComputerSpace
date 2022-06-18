@@ -8,6 +8,20 @@
             _context = context;
         }
 
+        public async Task<ServiceResponse<List<Product>>> GetAdminProducts()
+        {
+            var response = new ServiceResponse<List<Product>>()
+            {
+                Data = await _context.Products
+                     .Where(p => !p.Deleted)
+                     .Include(p => p.Variants.Where(v => !v.Deleted))
+                     .ThenInclude(v => v.ProductType)
+                     .ToListAsync()
+            };
+
+            return response;
+        }
+
         public async Task<ServiceResponse<List<Product>>> GetFeaturedProducts()
         {
             var response = new ServiceResponse<List<Product>>
