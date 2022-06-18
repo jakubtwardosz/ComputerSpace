@@ -18,6 +18,18 @@
 
         public event Action ProductsChanged;
 
+        public async Task<Product> CreateProduct(Product product)
+        {
+            var result = await _http.PostAsJsonAsync("api/product", product);
+            var newProduct = (await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>()).Data;
+            return newProduct;
+        }
+
+        public async Task DeleteProduct(Product product)
+        {
+            var result = await _http.DeleteAsync($"api/product/{product.Id}");
+        }
+
         public async Task GetAdminProducts()
         {
             var result = await _http
@@ -73,6 +85,12 @@
                 
             if (Products.Count == 0) Message = "Nie znaleziono produktów.";
             ProductsChanged?.Invoke();
+        }
+
+        public async Task<Product> UpdateProduct(Product product)
+        {
+            var result = await _http.PutAsJsonAsync($"api/product", product);
+            return (await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>()).Data;
         }
     }
 }
