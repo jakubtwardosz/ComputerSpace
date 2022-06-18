@@ -22,5 +22,19 @@ namespace ComputerSpace.Server.Controllers
             var response = await _productTypeService.GetProductTypes();
             return Ok(response);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<List<ProductType>>>> AddProductTypes(ProductType productType)
+        {
+            var response = await _productTypeService.AddProductTypes(productType);
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<List<ProductType>>>> UpdateProductTypes(ProductType productType)
+        {
+            var response = await _productTypeService.UpdateProductTypes(productType);
+            return Ok(response);
+        }
     }
 }
