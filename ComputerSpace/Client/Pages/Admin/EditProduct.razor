@@ -69,8 +69,9 @@ else
                    </div>
 
                    <div class="col">
-                       <button type="button" class="btn btn-primary" disabled="@variant.Deleted" @onclick="@(() => RemoveVariant(variant.ProductTypeId))"></button>
+                       <button type="button" class="btn btn-primary" disabled="@variant.Deleted" @onclick="@(() => RemoveVariant(variant.ProductTypeId))">
                         <i class="oi oi-trash"></i>
+                        </button>
                    </div>
                </div>
             }
@@ -98,11 +99,11 @@ else
                 <label for="visible" class="form-check-label">Visible</label>
             </div>
             <hr/>
-            <button type="submit" class="btn btn-primary">@btnText</button>
+            <button type="submit" class="btn btn-primary float-end">@btnText</button>
             <ValidationSummary></ValidationSummary>
 
     </EditForm>
-    @(!product.IsNew)
+    @if (!product.IsNew)
     {
         <button type="button" class="btn btn-danger float-start" @onclick="DeleteProduct">
             Delete Product

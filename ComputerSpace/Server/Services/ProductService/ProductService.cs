@@ -78,7 +78,7 @@
                 product = await _context.Products
                     .Include(p => p.Variants.Where(v => !v.Deleted))
                     .ThenInclude(v => v.ProductType)
-                    .FirstOrDefaultAsync(p => p.Id == productId && p.Deleted);
+                    .FirstOrDefaultAsync(p => p.Id == productId && !p.Deleted);
 
             }
             else
@@ -189,7 +189,7 @@
 
         public async Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
-            var dbProduct = await _context.Products.FindAsync(product.Id);
+            var dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == product.Id);
             if (dbProduct != null)
             {
                 return new ServiceResponse<Product>
@@ -211,7 +211,7 @@
                 var dbVariant = await _context.ProductVariants
                     .SingleOrDefaultAsync(v => v.ProductId == variant.ProductId &&
                         v.ProductTypeId == variant.ProductTypeId);
-                if(dbVariant == null)
+                if (dbVariant == null)
                 {
                     variant.ProductType = null;
                     _context.ProductVariants.Add(variant);

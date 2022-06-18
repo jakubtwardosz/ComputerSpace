@@ -21,7 +21,8 @@
         public async Task<Product> CreateProduct(Product product)
         {
             var result = await _http.PostAsJsonAsync("api/product", product);
-            var newProduct = (await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>()).Data;
+            var newProduct = (await result.Content
+                .ReadFromJsonAsync<ServiceResponse<Product>>()).Data;
             return newProduct;
         }
 
@@ -44,7 +45,7 @@
         public async Task<ServiceResponse<Product>> GetProduct(int productId)
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
-            return result;  
+            return result;
         }
 
         public async Task GetProducts(string? categoryUrl = null)
@@ -90,7 +91,8 @@
         public async Task<Product> UpdateProduct(Product product)
         {
             var result = await _http.PutAsJsonAsync($"api/product", product);
-            return (await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>()).Data;
+            var content = await result.Content.ReadFromJsonAsync<ServiceResponse<Product>>();
+            return content.Data;
         }
     }
 }
