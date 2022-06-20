@@ -9,11 +9,12 @@ namespace ComputerSpace.Server.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+
         public ProductController(IProductService productService)
         {
             _productService = productService;
         }
-        
+
         [HttpGet("admin"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetAdminProducts()
         {
@@ -57,7 +58,6 @@ namespace ComputerSpace.Server.Controllers
         }
 
         [HttpGet("category/{categoryUrl}")]
-
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(string categoryUrl)
         {
             var result = await _productService.GetProductsByCategory(categoryUrl);
@@ -65,7 +65,6 @@ namespace ComputerSpace.Server.Controllers
         }
 
         [HttpGet("search/{searchText}/{page}")]
-
         public async Task<ActionResult<ServiceResponse<ProductSearchResult>>> SearchProducts(string searchText, int page = 1)
         {
             var result = await _productService.SearchProducts(searchText, page);
@@ -73,7 +72,6 @@ namespace ComputerSpace.Server.Controllers
         }
 
         [HttpGet("searchsuggestions/{searchText}")]
-
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductSearchSuggestions(string searchText)
         {
             var result = await _productService.GetProductSearchSuggestions(searchText);
@@ -81,13 +79,10 @@ namespace ComputerSpace.Server.Controllers
         }
 
         [HttpGet("featured")]
-
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
         {
             var result = await _productService.GetFeaturedProducts();
             return Ok(result);
         }
-
-
     }
 }
