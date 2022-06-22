@@ -1,4 +1,4 @@
-﻿<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+﻿<MudContainer MaxWidth="MaxWidth.Large" Class="pt-8">
     <MudGrid>
         <MudItem xs="4">
             <MudNavMenu>
@@ -11,22 +11,26 @@
             </MudNavMenu>
         </MudItem>
         <MudItem xs="4">
-
-        </MudItem>
-        <MudItem xs="4">
-            <MudText Typo="Typo.h6">Computer Space</MudText>
+            <MudText Typo="Typo.h6">Social Media</MudText>
             <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" Class="my-2">
                 <MudIconButton Icon="@Icons.Custom.Brands.Facebook"></MudIconButton>
                 <MudIconButton Icon="@Icons.Custom.Brands.Instagram"></MudIconButton>
-                <MudIconButton Icon="@Icons.Custom.Brands.Twitter"></MudIconButton>                
+                <MudIconButton Icon="@Icons.Custom.Brands.Twitter"></MudIconButton>
             </MudButtonGroup>
+        </MudItem>
+        <MudItem xs="4">
+            <MudText Typo="Typo.h6">Contact</MudText>
+            <MudList>
+                <MudListItem Text="33 333 00 00" Icon="@Icons.Material.Filled.Phone" />
+                <MudListItem Text="computer@space.com" Icon="@Icons.Material.Filled.Email" />
+            </MudList>
         </MudItem>
     </MudGrid>
     <MudGrid>
         <MudItem xs="12" Class="my-4">
             <MudText Typo="Typo.caption" Align="Align.Left">Copyright © Computer Space 2022</MudText>
         </MudItem>
-    </MudGrid>    
+    </MudGrid>
 </MudContainer>
 
 
