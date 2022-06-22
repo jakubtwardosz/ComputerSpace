@@ -1,0 +1,14 @@
+﻿@inject NavigationManager NavigationManager
+
+<button type="button" @onclick="GoToHome" class="d-flex me-4">
+    <MudIcon Icon="@Icons.Filled.Computer" Title="Computer" />
+    <MudText Typo="Typo.h5" Class="ml-3">Computer Space</MudText>
+</button>
+
+
+@code {
+    private void GoToHome()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

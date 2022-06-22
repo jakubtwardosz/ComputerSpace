@@ -7,12 +7,18 @@
 
 @if(SearchText == null && CategoryUrl == null)
 {
+    <Carousel />
     <FeaturedProducts />
+
+    
 }
 else
 {
-    <ProductList />    
+    <ProductList />
 }
+
+    <Footer />
+
 
 @code {
     [Parameter]

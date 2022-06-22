@@ -1,7 +1,7 @@
 ﻿@inject ICategoryService CategoryService
 @implements IDisposable
 
-<div class="top-row ps-3 navbar navbar-dark navbar-toggler-wrapper">
+@*<div class="top-row ps-3 navbar navbar-dark navbar-toggler-wrapper">
     <div class="container-fluid">
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
@@ -10,22 +10,16 @@
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-nav">
-        <div class="nav-item px-2">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                Home
-            </NavLink>
-        </div>
-        @foreach (var category in CategoryService.Categories)
-        {
-            <div class="nav-item px-2">
-                <NavLink class="nav-link" href="@category.Url">
-                    @category.Name
-                </NavLink>
-            </div>            
-        }        
-    </nav>
-</div>
+              
+</div>*@
+
+    @foreach (var category in CategoryService.Categories)
+    {         
+        <MudButton HtmlTag="a" DisableElevation="true" Style="@($"mx-1;px-3;color:{Colors.DeepPurple.Lighten5};")" href="@category.Url">
+            @category.Name
+        </MudButton>
+    }
+
 
 @code {
     private bool collapseNavMenu = true;

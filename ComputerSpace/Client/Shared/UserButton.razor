@@ -3,28 +3,45 @@
 @inject NavigationManager NavigationManager
 @inject ICartService CartService
 
-<div class="dropdown">
+@*<div class="dropdown">
     <button @onclick="ToggleUserMenu"
-            @onfocusout="HideUserMenu"
-            class="btn btn-secondary dropdown-toggle user-button">
-        <i class="oi oi-person"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass">
-            <AuthorizeView>
-                <Authorized>
-                    <a href="profile" class="dropdown-item">Profile</a>
-                    <a href="orders" class="dropdown-item">Orders</a>
-                    <hr/>
-                    <AdminMenu />
-                    <button class="dropdown-item" @onclick="Logout">Logout</button>
-                </Authorized>
-                <NotAuthorized>
-                    <a href="login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Login</a>
-                    <a href="register" class="dropdown-item">Register</a>
-                </NotAuthorized>
-            </AuthorizeView>
-        </div>
-</div>
+    @onfocusout="HideUserMenu"
+    class="btn btn-secondary dropdown-toggle user-button">
+    <i class="oi oi-person"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass">
+    <AuthorizeView>
+    <Authorized>
+    <a href="profile" class="dropdown-item">Profile</a>
+    <a href="orders" class="dropdown-item">Orders</a>
+    <hr/>
+    <AdminMenu />
+    <button class="dropdown-item" @onclick="Logout">Logout</button>
+    </Authorized>
+    <NotAuthorized>
+    <a href="login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Login</a>
+    <a href="register" class="dropdown-item">Register</a>
+    </NotAuthorized>
+    </AuthorizeView>
+    </div>
+    </div>*@
+
+
+<MudMenu Icon="@Icons.Filled.Person">
+    <AuthorizeView>
+        <Authorized>
+            <MudMenuItem href="profile">Profile</MudMenuItem>
+            <MudMenuItem href="orders">Orders</MudMenuItem>
+            <AdminMenu />
+            <MudMenuItem @onclick="Logout">Logout</MudMenuItem>
+        </Authorized>
+        <NotAuthorized>
+            <MudMenuItem href="login">Login</MudMenuItem>
+            <MudMenuItem href="register">Register</MudMenuItem>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudMenu>
+
 
 @code {
     private bool showUserMenu = false;

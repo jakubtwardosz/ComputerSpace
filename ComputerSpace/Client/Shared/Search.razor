@@ -1,40 +1,54 @@
 ﻿@inject NavigationManager NavigationManager
 @inject IProductService ProductService
 
-<div class="input-group">
+@*<div class="input-group">
     <input @bind-value="searchText"
-           @bind-value:event="oninput"
-           type="search"
-           list="products"
-           @onkeyup="HandleSearch"
-           class="form-control"
-           placeholder="Search..."
-           @ref="searchInput" />
+    @bind-value:event="oninput"
+    type="search"
+    list="products"
+    @onkeyup="HandleSearch"
+    class="form-control"
+    placeholder="Search..."
+    @ref="searchInput" />
     <datalist id="products">
-        @foreach (var suggesstion in suggestions)
-        {
-            <option>@suggesstion</option>
-        }
+    @foreach (var suggesstion in suggestions)
+    {
+    <option>@suggesstion</option>
+    }
     </datalist>
     <div class="input-group-append">
-        <button class="btn btn-primary" @onclick="SearchProducts">
-            <span class="oi oi-magnifying-glass"></span>
-        </button>
+    <button class="btn btn-primary" @onclick="SearchProducts">
+    <span class="oi oi-magnifying-glass"></span>
+    </button>
     </div>
-</div>
+    </div>*@
+
+@*<MudAutocomplete T="string" @bind-Value="searchText" SearchFunc="@Search1"
+                 ResetValueOnEmptyText="@resetValueOnEmptyText"
+                 CoerceText="@coerceText" CoerceValue="@coerceValue"
+                 Class="search-box"
+                 Placeholder="Szukaj"
+                 Margin="Margin.None"
+                 Adornment="Adornment.End"
+                 AdornmentIcon="@Icons.Material.Filled.Search"
+                 DisableUnderLine="true" />*@
+
 
 @code {
+    private bool resetValueOnEmptyText;
+    private bool coerceText;
+    private bool coerceValue;
     private string searchText = string.Empty;
     private List<string> suggestions = new List<string>();
     protected ElementReference searchInput;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    /*protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if(firstRender)
         {
             await searchInput.FocusAsync();
         }
-    }
+    }*/
 
     public void SearchProducts()
     {
@@ -43,13 +57,19 @@
 
     public async Task HandleSearch(KeyboardEventArgs args)
     {
-        if(args.Key == null || args.Key.Equals("Enter"))
+        if (args.Key == null || args.Key.Equals("Enter"))
         {
             SearchProducts();
         }
-        else if(searchText.Length > 1)
+        else if (searchText.Length > 1)
         {
             suggestions = await ProductService.GetProductSearchSuggestions(searchText);
         }
     }
+
+    private async Task<IEnumerable<string>> Search1(string value)
+    {
+        return await ProductService.GetProductSearchSuggestions(value);
+    }
+
 }

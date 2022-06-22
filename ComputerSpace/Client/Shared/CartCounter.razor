@@ -2,10 +2,18 @@
 @inject ISyncLocalStorageService LocalStorage
 @implements IDisposable
 
-<a href="cart" class="btn btn-info">
+@*<a href="cart" class="btn btn-info">
     <i class="oi oi-cart"></i>
     <span class="badge">@GetCartItemsCount()</span>
-</a>
+    </a>*@
+
+<div Class="d-flex justify-space-around flex-wrap">
+    <MudButton Href="cart">
+        <MudBadge Content="@GetCartItemsCount()" Overlap="true" Class="mx-6 my-4">
+            <MudIcon Icon="@Icons.Filled.ShoppingCart" Color="Color.Default" />
+        </MudBadge>
+    </MudButton>
+</div>
 
 @code {
     private int GetCartItemsCount()
