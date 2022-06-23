@@ -15,7 +15,7 @@
 
     @foreach (var category in CategoryService.Categories)
     {         
-        <MudButton HtmlTag="a" DisableElevation="true" Style="@($"mx-1;px-3;color:{Colors.DeepPurple.Lighten5};")" href="@category.Url">
+        <MudButton HtmlTag="a" DisableElevation="true" Style="@($"mx-1;px-3;color:{Colors.DeepPurple.Lighten5};")" Href="@category.Url">
             @category.Name
         </MudButton>
     }
