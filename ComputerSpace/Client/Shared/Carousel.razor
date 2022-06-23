@@ -1,6 +1,4 @@
-﻿<h3>Carousel</h3>
-
-<MudCarousel Class="mud-width-full" Style="height:200px;" ShowArrows="@arrows" ShowBullets="@bullets" AutoCycle="@autocycle" TData="object">
+﻿<MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="@arrows" ShowBullets="@bullets" TData="object">
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
         <div class="d-flex" style="height:100%">
             <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
@@ -21,7 +19,6 @@
 @code {
     private bool arrows = true;
     private bool bullets = true;
-    private bool autocycle = true;
     private Transition transition = Transition.Slide;
 
 }
