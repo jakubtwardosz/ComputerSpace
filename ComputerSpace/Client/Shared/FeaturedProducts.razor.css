@@ -1,4 +1,4 @@
-﻿.container {
+﻿/*.container {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -30,4 +30,4 @@ img:hover {
     .container{
         justify-content:flex-start;
     }
-}
+}*/

@@ -1,45 +1,69 @@
 ﻿@inject IProductService ProductService
 @implements IDisposable
 
-<center><h2>Polecane produkty</h2></center>
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudGrid Class="my-8">
+        <MudItem xs="12">
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="px-5">Featured products</MudText>
+        </MudItem>
+    </MudGrid>
+    <MudGrid Class="overflow-x-auto my-8">
 
-@if (ProductService.Products == null || ProductService.Products.Count == 0)
-{
-    <span>@ProductService.Message</span>
-}
-else
-{
-    <div class="container">
-        @foreach (var product in ProductService.Products)
+        @if (ProductService.Products == null || ProductService.Products.Count == 0)
         {
-            @if (product.Featured)
-            {
-                <div class="featured-products">
-                    <div>
-                        <a href="product/@product.Id">
-                            @if(!string.IsNullOrEmpty(product.ImageUrl))
-                            {
-                                <img src="@product.ImageUrl" />
-                            }
-                            else if(product.Images.Count > 0)
-                            {
-                                <img src="@product.Images[0].Data"/>
-                            }
-                        </a>
-                    </div>
-                    <h4><a href="product/@product.Id">@product.Title</a></h4>
-                    @if (product.Variants != null && product.Variants.Count > 0)
-                    {
-                        <h5 class="price">@product.Variants[0].Price</h5>                             
-                    }
-                </div>
-            }
+            <MudText Typo="Typo.h5">@ProductService.Message</MudText>
         }
-    </div>
-}
+        else
+        {
+
+            @foreach (var product in ProductService.Products)
+            {
+                
+                    @if (product.Featured)
+                    {
+                        <MudItem xs="12" sm="6" md="3">
+                            <div>
+                                <a href="product/@product.Id">
+                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                    {
+                                        <MudImage Src="@product.ImageUrl" Fluid="true" Alt="@product.Title"  Class="rounded-lg"/>
+                                    }
+                                    else if (product.Images.Count > 0)
+                                    {
+                                        <MudImage Src="@product.Images[0].Data" Fluid="true" Alt="@product.Title"  Class="rounded-lg"/>
+                                    } 
+                                </a>
+                            </div>
+                            <MudText Typo="Typo.body2"><a href="product/@product.Id">@product.Title</a></MudText>
+                            @if (product.Variants != null && product.Variants.Count > 0)
+                            {
+                                <MudText Typo="Typo.caption"><a href="product/@product.Id">$@product.Variants[0].Price</a></MudText>
+                            }
+                        </MudItem>
+                    }
+                
+            }
+
+        }
+    </MudGrid>
+</MudContainer>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @code {
+    private Transition transition = Transition.Slide;
+
     protected override void OnInitialized()
     {
         ProductService.ProductsChanged += StateHasChanged;
@@ -50,3 +74,5 @@ else
         ProductService.ProductsChanged -= StateHasChanged;
     }
 }
+
+
