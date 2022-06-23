@@ -2,6 +2,7 @@
 @inject IProductService ProductService
 @inject ICartService CartService
 
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
 @if (product == null)
 {
     <span>@message</span>
@@ -29,16 +30,13 @@ else
 
             @if (product.Variants != null && product.Variants.Count > 1)
             {
-                <div class="mb-3">
-                    <select class="form-control" @bind="currentTypeId">
+                    @*How to bind it @currentTypeId?*@
+                    <MudSelect T="string" Label="Coffee" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var variant in product.Variants)
                         {
-                           <option value="@variant.ProductTypeId">
-                               @variant.ProductType.Name
-                           </option>
+                            <MudSelectItem Value="@variant.ProductType.Name" />
                         }
-                    </select>
-                </div>
+                    </MudSelect>
             }
 
             @if(GetSelectedVariant() != null)
@@ -53,12 +51,13 @@ else
                     @GetSelectedVariant().Price zł
                 </h4>
             }
-            <button class="btn btn-primary" onclick="@AddToCart">
-                <i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart
-            </button>
+            <MudFab StartIcon="@Icons.Filled.ShoppingCart" Label="Add to Cart" Color="Color.Tertiary" OnClick="@AddToCart" />
         </div>
     </div>
 }
+</MudContainer>
+
+<Footer />
 
 @code {
     private Product? product = null;
