@@ -3,50 +3,47 @@
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="pt-8">
 
-@if (ProductService.Products == null || ProductService.Products.Count == 0)
-{
-    <span>@ProductService.Message</span>
-}
-else
-{
-    <ul class="list-unstyled">
-    @foreach (var product in ProductService.Products)
+    @if (ProductService.Products == null || ProductService.Products.Count == 0)
     {
-        
-        <li class="media my-3">
-            <div class="media-img-wrapper mr-2">
-                <a href="/product/@product.Id">
-                    @if(!string.IsNullOrEmpty(product.ImageUrl))
-                    {
-                        <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
-                    }
-                    else if(product.Images.Count > 0)
-                    {
-                        <img src="@product.Images[0].Data"/>
-                    }                    
-                </a>
-            </div>
-            <div class="media-body">
-                <a href="/product/@product.Id">
-                    <h4 class="mb-0">@product.Title</h4>
-                </a>
-                    <p>@product.Description</p>
-                    <h5 class="price">
-                        @GetPriceText(product)
-                    </h5>
-                
-            </div>
-        </li>
+        <span>@ProductService.Message</span>
     }
-    </ul>
-    for (var i = 1; i <= ProductService.PageCount; i++)
+    else
     {
-        <a class="btn
+        <ul>
+            @foreach (var product in ProductService.Products)
+            {
+
+                <li class="media my-3">
+                    <div class="media-img-wrapper">
+                        <a href="/product/@product.Id">
+                            @if (!string.IsNullOrEmpty(product.ImageUrl))
+                            {
+                                <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
+                            }
+                            else if (product.Images.Count > 0)
+                            {
+                                <img src="@product.Images[0].Data" />
+                            }
+                        </a>
+                    </div>
+                    <div class="ml-4">
+                        <a href="/product/@product.Id">
+                            <MudText Typo="Typo.body1"><b>@product.Title</b></MudText>
+                        </a>
+                        <p>@product.Description</p>
+                        <MudText Typo="Typo.body2" Class="price">@GetPriceText(product)</MudText>
+                    </div>
+                </li>
+            }
+        </ul>
+        for (var i = 1; i <= ProductService.PageCount; i++)
+        {
+            <a class="btn
                  @(i == ProductService.CurrentPage ? "btn-info" : "btn-outline-info")
                  page-selection"
-                 href="/search/@ProductService.LastSearchText/@i">@i</a>
+       href="/search/@ProductService.LastSearchText/@i">@i</a>
+        }
     }
-}
 
 </MudContainer>
 
