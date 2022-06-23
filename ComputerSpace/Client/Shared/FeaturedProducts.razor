@@ -1,14 +1,9 @@
 ﻿@inject IProductService ProductService
 @implements IDisposable
-
-<MudContainer MaxWidth="MaxWidth.Large">
-    <MudGrid Class="my-8">
-        <MudItem xs="12">
-            <MudText Align="Align.Center" Typo="Typo.h4" Class="px-5">Featured products</MudText>
-        </MudItem>
-    </MudGrid>
-    <MudGrid Class="overflow-x-auto my-8">
-
+<MudContainer Class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Featured products</MudText>
+    <MudText Align="Align.Center">Most popular choice this week. Check them out</MudText>
+    <MudGrid Class="mt-8">
         @if (ProductService.Products == null || ProductService.Products.Count == 0)
         {
             <MudText Typo="Typo.h5">@ProductService.Message</MudText>
@@ -18,32 +13,38 @@
 
             @foreach (var product in ProductService.Products)
             {
-                
-                    @if (product.Featured)
-                    {
-                        <MudItem xs="12" sm="6" md="3">
-                            <div>
-                                <a href="product/@product.Id">
-                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
-                                    {
-                                        <MudImage Src="@product.ImageUrl" Fluid="true" Alt="@product.Title"  Class="rounded-lg"/>
-                                    }
-                                    else if (product.Images.Count > 0)
-                                    {
-                                        <MudImage Src="@product.Images[0].Data" Fluid="true" Alt="@product.Title"  Class="rounded-lg"/>
-                                    } 
-                                </a>
-                            </div>
-                            <MudText Typo="Typo.body2"><a href="product/@product.Id">@product.Title</a></MudText>
-                            @if (product.Variants != null && product.Variants.Count > 0)
-                            {
-                                <MudText Typo="Typo.caption"><a href="product/@product.Id">$@product.Variants[0].Price</a></MudText>
-                            }
-                        </MudItem>
-                    }
-                
-            }
 
+                @if (product.Featured)
+                {
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudCard Elevation="25" Class="rounded-lg pb-4">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <a href="product/@product.Id">
+                                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                        {
+                                            <MudImage Src="@product.ImageUrl" Fluid="true" Alt="@product.Title" Class="rounded-lg" />
+                                        }
+                                        else if (product.Images.Count > 0)
+                                        {
+                                            <MudImage Src="@product.Images[0].Data" Fluid="true" Alt="@product.Title" Class="rounded-lg" />
+                                        }
+                                    </a>
+                                    
+                                </CardHeaderContent>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <div class="d-flex justify-left">
+                                    <MudText Typo="Typo.h6"><a href="product/@product.Id">@product.Title</a></MudText>
+                                </div>
+                                <div class="d-flex justify-left">
+                                    <MudText Typo="Typo.body1" Class="ml-1 mt-5" Color="Color.Secondary"><a href="product/@product.Id">$@product.Variants[0].Price</a></MudText>
+                                </div>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+            }
         }
     </MudGrid>
 </MudContainer>
