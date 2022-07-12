@@ -8,27 +8,30 @@
 
 <PageTitle>Login</PageTitle>
 
-<h3>Login</h3>
-
-<EditForm Model="user" OnValidSubmit="HandleLogin">
-    <DataAnnotationsValidator />
-    <div class="mb-3">
-        <label for="email">Email</label>
-        <InputText id="email" @bind-Value="user.Email" class="form-control"/>
-        <ValidationMessage For="@(() => user.Email)" />
-    </div>
-    <div class="mb-3">
-        <label for="password">Password</label>
-        <InputText id="password" @bind-Value="user.Password" class="form-control" type="password"/>
-        <ValidationMessage For="@(() => user.Password)" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-</EditForm>
-
-<div class="text-danger">
-    <span>@errorMessage</span>
-</div>
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Login</MudText>
+    <MudGrid Spacing="6" Class="mt-16">
+        <MudItem xs="12">
+            <EditForm Model="user" OnValidSubmit="HandleLogin">
+                <DataAnnotationsValidator />
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField T="string" @bind-Value="user.Email" Label="Email" />
+                        <ValidationMessage For="@(() => user.Email)" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField T="string" @bind-Value="user.Password" Label="Password" InputType="InputType.Password" />
+                        <ValidationMessage For="@(() => user.Password)" />
+                    </MudItem>
+                    <MudItem xs="12" Class="d-flex">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8 mb-4">Login</MudButton>
+                    </MudItem>
+                </MudGrid>
+             </EditForm>
+             @errorMessage
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 
 @code {
     private UserLogin user = new UserLogin();
