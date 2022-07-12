@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ComputerSpace.Shared.Address">
+    <Position X="18" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAIAAAACAgAAAIAAAAAAAIABAAAAAg=</HashCode>
+      <FileName>Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.CartItem">
+    <Position X="20.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>CartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.CartProductResponse">
+    <Position X="23" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAQAAQAQAAAEAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>CartProductResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.Category">
+    <Position X="25.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAEAQAAAAAAAAICEAAACAAAAA=</HashCode>
+      <FileName>Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.Image">
+    <Position X="8" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.Order">
+    <Position X="10.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAAAAAEAAAAAAAAAAAgAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ComputerSpace.Shared.OrderItem">
+    <Position X="14.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAQAQAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAA=</HashCode>
+      <FileName>OrderItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.OrderDetailsProductResponse">
+    <Position X="8.75" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAQAAQAAAAAEAAAAAAAAAAAAAAQAAAAAAAgAAAAAA=</HashCode>
+      <FileName>OrderDetailsProductResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.OrderDetailsResponse">
+    <Position X="9.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>OrderDetailsResponse.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Products" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ComputerSpace.Shared.OrderOverviewResponse">
+    <Position X="18" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CAACAIAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderOverviewResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.Product">
+    <Position X="4.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQBAAAAAgAkAAAAAAEAAAAAAAABAIgEAAACAACAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Images" />
+      <Property Name="Variants" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ComputerSpace.Shared.ProductSearchResult">
+    <Position X="21" Y="3.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAY=</HashCode>
+      <FileName>ProductSearchResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.ProductType">
+    <Position X="24" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAAACAAAAA=</HashCode>
+      <FileName>ProductType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.ProductVariant">
+    <Position X="0.5" Y="0.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAQAQAAAAAAAAAAEAAAAAAAAABIAEAAACAAAAA=</HashCode>
+      <FileName>ProductVariant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.ServiceResponse&lt;T&gt;">
+    <Position X="26.25" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>ServiceResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.User">
+    <Position X="18" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EACCAAAAACAAAAAAEAAAAAAAAAAAAAACAAAEAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.UserChangePassword">
+    <Position X="20.75" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>UserChangePassword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.UserLogin">
+    <Position X="23.75" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>UserLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComputerSpace.Shared.UserRegister">
+    <Position X="26.25" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>UserRegister.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
