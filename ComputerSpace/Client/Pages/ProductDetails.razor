@@ -2,62 +2,64 @@
 @inject IProductService ProductService
 @inject ICartService CartService
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
-@if (product == null)
-{
-    <span>@message</span>
-}
-else
-{
-    <div class="media">
-        <div class="media-img-wrapper mr-2">
-            @if(!string.IsNullOrEmpty(product.ImageUrl))
+
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudGrid Spacing="6" Justify="Justify.Center" Class="mt-16">
+        <MudItem>
+            @if (product == null)
             {
-                <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
+                <span>@message</span>
             }
             else
             {
-                <MudCarousel Class="mud-with-full" ItemsSource="@product.Images" Style="height: 200px">
-                    <ItemTemplate>
-                        <MudImage Src="@context.Data"></MudImage>
-                    </ItemTemplate>
-                </MudCarousel>
-            }            
-        </div>
-        <div class="media-body">
-            <h2 class="mb-0">@product.Title</h2>
-            <p>@product.Description</p>
-
-            @if (product.Variants != null && product.Variants.Count > 1)
-            {
-                    @*How to bind it @currentTypeId?*@
-                    <MudSelect T="string" Label="Coffee" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var variant in product.Variants)
+                <div class="media">
+                    <div class="media-img-wrapper mr-2">
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
                         {
-                            <MudSelectItem Value="@variant.ProductType.Name" />
+                            <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
                         }
-                    </MudSelect>
+                        else
+                        {
+                            <MudCarousel Class="mud-width-full" ItemsSource="@product.Images" Style="height: 200px;">
+                                <ItemTemplate>
+                                    <MudImage Src="@context.Data"></MudImage>>
+                                </ItemTemplate>
+                            </MudCarousel>
+                        }
+                    </div>
+                    <div class="media-body">
+                        <h2 class="mb-0">@product.Title</h2>
+                        <p>@product.Description</p>
+                        @if (product.Variants != null && product.Variants.Count > 1)
+                        {
+                            <div class="mb-3">
+                                <select class="form-select" @bind="currentTypeId">
+                                    @foreach (var variant in product.Variants)
+                                    {
+                                        <option value="@variant.ProductTypeId">@variant.ProductType.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        @if (GetSelectedVariant() != null)
+                        {
+                            @if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
+                            {
+                                <h6 class="text-muted original-price">
+                                    $@GetSelectedVariant().OriginalPrice
+                                </h6>
+                            }
+                            <h4 class="price">
+                                $@GetSelectedVariant().Price
+                            </h4>
+                        }
+                        <MudButton @onclick="AddToCart" Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Size="Size.Large" Class="mt-2 mb-2">Add to Cart</MudButton>
+                    </div>
+                </div>
             }
-
-            @if(GetSelectedVariant() != null)
-            {
-                @if(GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
-                {
-                    <h6 class="text-muted original-price">
-                        @GetSelectedVariant().OriginalPrice zł
-                    </h6>
-                }
-                <h4 class="price">
-                    @GetSelectedVariant().Price zł
-                </h4>
-            }
-            <MudFab StartIcon="@Icons.Filled.ShoppingCart" Label="Add to Cart" Color="Color.Tertiary" OnClick="@AddToCart" />
-        </div>
-    </div>
-}
+        </MudItem>
+    </MudGrid>
 </MudContainer>
-
-<Footer />
 
 @code {
     private Product? product = null;
@@ -71,9 +73,8 @@ else
     {
         message = "Loading product...";
 
-        var result = await ProductService.GetProduct(Id);   
-
-        if(!result.Success)
+        var result = await ProductService.GetProduct(Id);
+        if (!result.Success)
         {
             message = result.Message;
         }
@@ -86,6 +87,7 @@ else
             }
         }
     }
+
     private ProductVariant GetSelectedVariant()
     {
         var variant = product.Variants.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
@@ -96,10 +98,10 @@ else
     {
         var productVariant = GetSelectedVariant();
         var cartItem = new CartItem
-        {
-            ProductId = productVariant.ProductId,
-            ProductTypeId = productVariant.ProductTypeId
-        };
+            {
+                ProductId = productVariant.ProductId,
+                ProductTypeId = productVariant.ProductTypeId
+            };
 
         await CartService.AddToCart(cartItem);
     }
