@@ -1,4 +1,4 @@
-﻿.container{
+﻿/*.container{
     display: flex;
     padding: 6px;
 }
@@ -35,7 +35,15 @@
     .btn-delete: hover{
         text-decoration:underline;
     }
+    */
 
-.input-quantity{
-    width:70px;
+.input-quantity {
+    border-radius: 4px;
+    border-color: rgb(189 189 189);
+    border: 1px solid;
+    height: 1.1876em;
+    margin: 0;
+    padding: 18.5px 14px;
+    width: 100%;
+    font-size: 16px;
 }

@@ -4,48 +4,67 @@
 @inject IAuthService AuthService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Koszyk</PageTitle>
-<h3>Koszyk</h3>
+<PageTitle>Cart</PageTitle>
 
-@if (cartProducts == null || cartProducts.Count == 0)
-{
-    <span>@message</span>
-}
-else
-{
-    <div>
-        @foreach (var product in cartProducts)
-        {
-            <div class="container">
-                <div class="image-wrapper">
-                    <img src="@product.ImageUrl" class="image"/>
-                </div>
-                <div class="name">
-                    <h5><a href="/product/@product.ProductId"></a></h5>
-                    <span>@product.ProductType</span><br/>
-                    <input type="number" value="@product.Quantity"
-                        @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
-                        class="form-control input-quantity"
-                        min="1" />
-                    <button class="btn-delete" @onclick="@(() =>
-                        RemoveProductFromCart(product.ProductId, product.ProductTypeId))">Usuń produkt</button>
-                </div>
-                <div class="cart-product-price">@(product.Price * product.Quantity) zł</div>
-            </div>
-        }
-        <div class="cart-product-price">
-            Łączna kwota (@cartProducts.Count): @cartProducts.Sum(product => @product.Price * product.Quantity) zł
-        </div>
-    </div>
-    @if (isAuthenticated)
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Cart</MudText>
+
+    @if (cartProducts == null || cartProducts.Count == 0)
     {
-     <div>
-         <h5>Delivery Address</h5>
-         <AddressForm />
-     </div>   
+        <MudText Align="Align.Center">@message</MudText>
     }
-    <button @onclick="PlaceOrder" class="btn alert-success float-end mt-1">Checkout</button>
-}
+    else
+    {
+        <MudGrid Spacing="0" Class="mt-16">
+
+            @foreach (var product in cartProducts)
+            {
+                <MudItem xs="12">
+                    <MudGrid>
+                        <MudItem xs="12" sm="3">
+
+                            <MudImage Src="@product.ImageUrl" Width="154" Height="133" Elevation="0" Class="ma-4" />
+                        </MudItem>
+
+                        <MudItem xs="12" sm="4">
+                            <a href="/product/@product.ProductId"><MudText Typo="Typo.h6">@product.Title</MudText></a>
+                            <MudText Typo="Typo.subtitle1">@product.ProductType</MudText>
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudText>@(product.Price * product.Quantity) zł</MudText>
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+
+                            <input type="number" value="@product.Quantity" class="input-quantity"
+                           @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
+                           min="1" />
+                        
+                        </MudItem>
+                        <MudItem xs="12" sm="1">   
+                        
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small"/>
+                            
+
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+            }
+            <MudItem xs="12">
+                <MudText Align="Align.End">Łączna kwota (@cartProducts.Count): @cartProducts.Sum(product => @product.Price * product.Quantity) zł</MudText>
+            </MudItem>
+            @if (isAuthenticated)
+            {
+                <MudItem xs="12">
+                    <MudText Typo="Typo.h5" GutterBottom="true">Delivery Address</MudText>
+                    <AddressForm />
+                </MudItem>
+            }
+            <MudItem xs="12" Class="d-flex justify-end">
+                <MudButton @onclick="PlaceOrder" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Checkout</MudButton>
+            </MudItem>
+        </MudGrid>
+    }
+</MudContainer>
 
 @code {
     List<CartProductResponse> cartProducts = null;
