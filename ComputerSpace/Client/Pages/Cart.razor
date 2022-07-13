@@ -15,42 +15,44 @@
     }
     else
     {
-        <MudGrid Spacing="0" Class="mt-16">
+        <MudSimpleTable Style="overflow-x: auto;" Class="mt-16" Elevation="1" Dense="true">
+            <thead>
+                <tr>
 
-            @foreach (var product in cartProducts)
-            {
-                <MudItem xs="12">
-                    <MudGrid>
-                        <MudItem xs="12" sm="3">
+                    <th>Image</th>
+                    <th>Product name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in cartProducts)
+                {
+                    <tr>
 
-                            <MudImage Src="@product.ImageUrl" Width="154" Height="133" Elevation="0" Class="ma-4" />
-                        </MudItem>
-
-                        <MudItem xs="12" sm="4">
-                            <a href="/product/@product.ProductId"><MudText Typo="Typo.h6">@product.Title</MudText></a>
-                            <MudText Typo="Typo.subtitle1">@product.ProductType</MudText>
-                        </MudItem>
-                        <MudItem xs="12" sm="2">
-                            <MudText>@(product.Price * product.Quantity) zł</MudText>
-                        </MudItem>
-                        <MudItem xs="12" sm="2">
-
+                        <td><MudImage Src="@product.ImageUrl" Width="154" Height="133" Elevation="0" /></td>
+                        <td>
+                            <a href="/product/@product.ProductId"><MudText>@product.Title</MudText></a>
+                            <MudText>@product.ProductType</MudText>
+                        </td>
+                        <td><MudText>@(product.Price * product.Quantity) zł</MudText></td>
+                        <td>
                             <input type="number" value="@product.Quantity" class="input-quantity"
                            @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
                            min="1" />
-                        
-                        </MudItem>
-                        <MudItem xs="12" sm="1">   
-                        
-                            <MudIconButton Icon="@Icons.Material.Filled.Delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small"/>
-                            
+                        </td>
+                        <td>
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
 
-                        </MudItem>
-                    </MudGrid>
-                </MudItem>
-            }
+        <MudGrid Class="mt-8">
             <MudItem xs="12">
-                <MudText Align="Align.End">Łączna kwota (@cartProducts.Count): @cartProducts.Sum(product => @product.Price * product.Quantity) zł</MudText>
+                <MudText Typo="Typo.h6" Align="Align.End">Total price (@cartProducts.Count): @cartProducts.Sum(product => @product.Price * product.Quantity) zł</MudText>
             </MudItem>
             @if (isAuthenticated)
             {
