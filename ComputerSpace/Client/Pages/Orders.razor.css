@@ -28,3 +28,12 @@
     font-size: 1.2em;
     text-align: center;
 }
+.order-link {
+    color: var(--mud-palette-primary) !important;
+    margin: 8px;
+    margin-left:0;
+}
+
+.order-link:hover, .order-link:focus-visible {
+    text-decoration: underline;
+}
