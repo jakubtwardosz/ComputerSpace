@@ -2,31 +2,21 @@
 
 @if (address == null)
 {
-    <span>
-        You haven't specified a delivery address, yet.
-        <button class="btn" @onclick="InitAddress">Add an address?</button>
-    </span>
+    <MudText>You haven't specified a delivery address, yet.</MudText>
+    <MudButton ButtonType="ButtonType.Button" @onclick="InitAddress" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Medium" Class="mt-2">Add an address?</MudButton>
 }
 else if (!editAddress)
 {
-    <p>
-        <span>@address.FirstName @address.LastName</span><br />
-        <span>@address.Street</span><br />
-        <span>@address.City, @address.State, @address.Zip</span><br />
-        <span>@address.Country</span><br />
-    </p>
-    <button type="button" class="btn btn-primary" @onclick="EditAddress">Edit</button>
+    <MudText>@address.FirstName @address.LastName</MudText>
+    <MudText>@address.Street</MudText>
+    <MudText>@address.City, @address.State, @address.Zip</MudText>
+    <MudText>@address.Country</MudText>
+    <MudButton ButtonType="ButtonType.Button" @onclick="EditAddress" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Medium" Class="mt-2">Edit</MudButton>
 }
 else
 {
     <EditForm Model="address" OnSubmit="SubmitAddress">
         <MudGrid>
-            <MudItem xs="12">
-                <MudTextField T="string" Label="Country" @bind-Value="address.Country" />
-            </MudItem>
-            <MudItem xs="12">
-                <MudTextField T="string" Label="ZIP/Postal Code" @bind-Value="address.Zip" />
-            </MudItem>
             <MudItem xs="6">
                 <MudTextField T="string" Label="First name" @bind-Value="address.FirstName" />
             </MudItem>
@@ -42,13 +32,18 @@ else
             <MudItem xs="6">
                 <MudTextField T="string" Label="State" @bind-Value="address.State" />
             </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="Country" @bind-Value="address.Country" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField T="string" Label="ZIP/Postal Code" @bind-Value="address.Zip" />
+            </MudItem>
             <MudItem xs="12" Class="d-flex justify-center">
-                <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Save</MudButton>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Save</MudButton>
             </MudItem>
         </MudGrid>
     </EditForm>
 }
-
 @code {
     Address address = null;
     bool editAddress = false;
