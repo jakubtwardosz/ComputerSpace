@@ -8,35 +8,42 @@
 
     <MudGrid Spacing="6" Class="mt-16">
         <MudItem xs="12">
-            @if(order == null)
+            @if (order == null)
             {
-                <span>Loading order...</span>
+                <MudText>Loading order...</MudText>
             }
             else
             {
-                <h3>Order from @order.OrderDate</h3>
+                <MudText Typo="Typo.h6">Order from @order.OrderDate</MudText>
 
-                <div>
-                    @foreach (var product in order.Products)
-                    {
-                       <div class="container">
-                           <div class="image-wrapper">
-                               <img src="@product.ImageUrl" class="image" />
-                           </div>
-                           <div class="name">
-                               <h5><a href="/product/@product.ProductId">@product.Title</a></h5>
-                               <span>@product.ProductType</span><br/>
-                               <span>Quantity: @product.Quantity</span>
-                           </div>
+                <MudSimpleTable Style="overflow-x: auto;" Class="mt-8" Elevation="1" Dense="true">
+                    <thead>
+                        <tr>
 
-                           <div class="product-price">@product.TotalPrice zł</div>
-                       </div>
-                    }
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in order.Products)
+                        {
+                            <tr>
 
-                    <div class="product-price">
-                        Total: @order.TotalPrice zł
-                    </div>
-                </div>
+                                <td><MudImage Src="@product.ImageUrl" Width="154" Height="133" Elevation="0" /></td>
+                                <td>
+                                    <a href="/product/@product.ProductId"><MudText>@product.Title</MudText></a>
+                                    <MudText Typo="Typo.body2">@product.ProductType</MudText>
+                                    <MudText Typo="Typo.body2">Quantity: @product.Quantity</MudText>
+                                </td>
+                                <td><MudText>@product.TotalPrice zł</MudText></td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </MudSimpleTable>
+
+                <MudText Class="mt-4" Align="Align.Right"><b>Total: @order.TotalPrice zł</b></MudText>
             }
         </MudItem>
     </MudGrid>
