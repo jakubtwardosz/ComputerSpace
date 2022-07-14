@@ -3,9 +3,10 @@
 
 <PageTitle>Thank you!</PageTitle>
 
-<h3>Thank you!</h3>
-
-<span>Thank you for your order! You can check your orders <a href="orders">here</a>.</span>
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Thank you!</MudText>
+    <MudText>Thank you for your order! You can check your orders <a href="orders">here</a>.</MudText>
+</MudContainer>
 
 @code {
     protected override async Task OnInitializedAsync()

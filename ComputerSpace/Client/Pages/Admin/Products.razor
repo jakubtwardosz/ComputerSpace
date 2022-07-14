@@ -38,19 +38,18 @@
                                     <img src="@product.Images[0].Data" />
                                     }
                                 </td>
-                                <td>@product.Title</td>
+                                <td><MudText>@product.Title</MudText></td>
                                 <td>
                                     @foreach (var variant in product.Variants)
                                     {
-                                    <span>@variant.ProductType.Name</span>
+                                    <MudText>@variant.ProductType.Name</MudText>
 
-                                    <br />
                                     }
                                  </td>
                                 <td>
                                 @foreach (var variant in product.Variants)
                                     {
-                                    <span>@variant.Price</span>
+                                    <MudText>@variant.Price</MudText>
                                     }
                                 </td>
                                 <td>@(product.Visible ? "✅" : "")</td>
