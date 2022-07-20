@@ -16,7 +16,7 @@ namespace ComputerSpace.Server.Services.PaymentService
             IOrderService orderService)
         {
             StripeConfiguration.ApiKey = "sk_test_51L9YmXEh3MbtPZYO52v7wPziXLflV8ZUkpLSMZyrEu3cEjjXx6RlRFZUAtpKPr9NqGBBpfCMFVSk23sLqoFUOJqr00Y5yk3PPw";
-            
+
             _cartService = cartService;
             _authService = authService;
             _orderService = orderService;
@@ -44,10 +44,10 @@ namespace ComputerSpace.Server.Services.PaymentService
             var options = new SessionCreateOptions
             {
                 CustomerEmail = _authService.GetUserEmail(),
-                ShippingAddressCollection = 
+                ShippingAddressCollection =
                     new SessionShippingAddressCollectionOptions
                     {
-                        AllowedCountries = new List<string>{ "US" }
+                        AllowedCountries = new List<string> { "US" }
                     },
                 PaymentMethodTypes = new List<string>
                 {
@@ -64,23 +64,13 @@ namespace ComputerSpace.Server.Services.PaymentService
             Session session = service.Create(options);
             return session;
         }
-
-        public async Task<ServiceResponse<bool>> FulfillOrder(HttpRequest request)
+        /*FulfillOrder nigdy się nie wywoływał*/
+        public async Task<ServiceResponse<bool>> FulfillOrder()
         {
-            var json = await new StreamReader(request.Body).ReadToEndAsync();
             try
             {
-                var stripeEvent = EventUtility.ConstructEvent(
-                        json,
-                        request.Headers["Stripe-Signature"],
-                        secret
-                    );
-                if (stripeEvent.Type == Events.CheckoutSessionCompleted)
-                {
-                    var session = stripeEvent.Data.Object as Session;
-                    var user = await _authService.GetUserByEmail(session.CustomerEmail);
-                    await _orderService.PlaceOrder(user.Id);
-                }
+                var user = _authService.GetUserId();
+                await _orderService.PlaceOrder(user);
 
                 return new ServiceResponse<bool> { Data = true };
             }

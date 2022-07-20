@@ -7,7 +7,7 @@ namespace ComputerSpace.Server.Services.OrderService
         private readonly DataContext _context;
         private readonly ICartService _cartService;
         private readonly IAuthService _authService;
-        
+
         public OrderService(DataContext context,
             ICartService cartService,
             IAuthService authService)
@@ -28,7 +28,8 @@ namespace ComputerSpace.Server.Services.OrderService
                 .ToListAsync();
 
             var orderResponse = new List<OrderOverviewResponse>();
-            orders.ForEach(o => orderResponse.Add(new OrderOverviewResponse {
+            orders.ForEach(o => orderResponse.Add(new OrderOverviewResponse
+            {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
                 TotalPrice = o.TotalPrice,
@@ -38,7 +39,7 @@ namespace ComputerSpace.Server.Services.OrderService
                     o.OrderItems.First().Product.Title,
                 ProductImageUrl = o.OrderItems.First().Product.ImageUrl
             }));
-            
+
             response.Data = orderResponse;
 
             return response;

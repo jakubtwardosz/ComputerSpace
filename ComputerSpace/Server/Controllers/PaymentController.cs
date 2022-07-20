@@ -19,17 +19,19 @@ namespace ComputerSpace.Server.Controllers
         public async Task<ActionResult<string>> CreateCheckoutSession()
         {
             var session = await _paymentService.CreateCheckoutSession();
+            var response = await _paymentService.FulfillOrder();
             return Ok(session.Url);
         }
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<bool>>> FulfillOrder()
         {
-            var response = await _paymentService.FulfillOrder(Request);
-            if (!response.Success)
-                return BadRequest(response.Message);
+            //var response = await _paymentService.FulfillOrder(Request);
+            //if (!response.Success)
+            //    return BadRequest(response.Message);
 
-            return Ok(response);
+            //return Ok(response);
+            return Ok();
 
         }
     }
