@@ -1,33 +1,35 @@
 ﻿<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
     <MudGrid>
-        <MudItem xs="12" md="4">
-            <MudNavMenu>
-                <MudText Typo="Typo.h6" Class="px-4">Menu</MudText>
-                <MudNavLink Href="#">Gift cards</MudNavLink>
-                <MudNavLink Href="#">Delivery & returns</MudNavLink>
-                <MudNavLink Href="#">Payments</MudNavLink>
-                <MudNavLink Href="#">Contact</MudNavLink>
-                <MudNavLink Href="#">Terms of service</MudNavLink>
-            </MudNavMenu>
+        <MudItem xs="12" md="4" Class="d-flex flex-column">
+            <MudText Typo="Typo.h6" Class="mb-3">Menu</MudText>
+            <MudLink Href="#" Underline="Underline.None" Class="mb-2">Gift cards</MudLink>
+            <MudLink Href="#" Underline="Underline.None" Class="mb-2">Delivery & returns</MudLink>
+            <MudLink Href="#" Underline="Underline.None" Class="mb-2">Payments</MudLink>
+            <MudLink Href="#" Underline="Underline.None" Class="mb-2">Contact</MudLink>
+            <MudLink Href="#" Underline="Underline.None" Class="mb-2">Terms of service</MudLink>
         </MudItem>
         <MudItem xs="12" md="4">
-            <MudText Typo="Typo.h6">Social Media</MudText>
+            <MudText Typo="Typo.h6" Class="mb-3">Social Media</MudText>
             <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" Class="my-2">
                 <MudIconButton Icon="@Icons.Custom.Brands.Facebook"></MudIconButton>
                 <MudIconButton Icon="@Icons.Custom.Brands.Instagram"></MudIconButton>
                 <MudIconButton Icon="@Icons.Custom.Brands.Twitter"></MudIconButton>
             </MudButtonGroup>
         </MudItem>
-        <MudItem xs="12" md="4">
-            <MudText Typo="Typo.h6">Contact</MudText>
-            <MudList>
-                <MudListItem Text="33 333 00 00" Icon="@Icons.Material.Filled.Phone" />
-                <MudListItem Text="computer@space.com" Icon="@Icons.Material.Filled.Email" />
-            </MudList>
+        <MudItem xs="12" md="4" Class="d-flex flex-column">
+            <MudText Typo="Typo.h6" Class="mb-3">Contact</MudText>
+            <div class="d-flex align-center my-2">
+                <MudIcon Icon="@Icons.Material.Filled.Phone" Size="Size.Small" Class="mr-2"></MudIcon>
+                <MudText>33 333 00 00</MudText>
+            </div>
+            <div class="d-flex align-center my-2">
+                <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Small" Class="mr-2"></MudIcon>
+                <MudText>computer@space.com</MudText>
+            </div>
         </MudItem>
     </MudGrid>
     <MudGrid>
-        <MudItem xs="12" Class="my-4">
+        <MudItem xs="12" Class="py-10">
             <MudText Typo="Typo.caption" Align="Align.Left">Copyright © Computer Space 2022</MudText>
         </MudItem>
     </MudGrid>
