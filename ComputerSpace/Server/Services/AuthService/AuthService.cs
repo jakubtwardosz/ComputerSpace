@@ -19,10 +19,10 @@ namespace ComputerSpace.Server.Services.AuthService
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
         }
+
         public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
         public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-
-
 
         public async Task<ServiceResponse<string>> Login(string email, string password)
         {
@@ -34,7 +34,7 @@ namespace ComputerSpace.Server.Services.AuthService
                 response.Success = false;
                 response.Message = "User not found.";
             }
-            else if (!VerifyPasswordHash(password,user.PasswordHash,user.PasswordSalt))
+            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             {
                 response.Success = false;
                 response.Message = "Wrong password.";
@@ -51,10 +51,10 @@ namespace ComputerSpace.Server.Services.AuthService
         {
             if (await UserExists(user.Email))
             {
-                return new ServiceResponse<int> 
-                { 
-                    Success = false, 
-                    Message = "User already exists." 
+                return new ServiceResponse<int>
+                {
+                    Success = false,
+                    Message = "User already exists."
                 };
             }
 
@@ -72,17 +72,16 @@ namespace ComputerSpace.Server.Services.AuthService
         public async Task<bool> UserExists(string email)
         {
             if (await _context.Users.AnyAsync(user => user.Email.ToLower()
-                .Equals(email.ToLower())))
+                 .Equals(email.ToLower())))
             {
                 return true;
             }
-
             return false;
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512())
+            using (var hmac = new HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac
@@ -94,9 +93,9 @@ namespace ComputerSpace.Server.Services.AuthService
         {
             using (var hmac = new HMACSHA512(passwordSalt))
             {
-                var computeHash = 
+                var computedHash =
                     hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computeHash.SequenceEqual(passwordHash);
+                return computedHash.SequenceEqual(passwordHash);
             }
         }
 
@@ -105,7 +104,7 @@ namespace ComputerSpace.Server.Services.AuthService
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Email),
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
@@ -127,7 +126,7 @@ namespace ComputerSpace.Server.Services.AuthService
         public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
         {
             var user = await _context.Users.FindAsync(userId);
-            if(user == null)
+            if (user == null)
             {
                 return new ServiceResponse<bool>
                 {

@@ -9,13 +9,13 @@ namespace ComputerSpace.Server.Services.PaymentService
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
 
-        const string secret = "whsec_47ea6b1453184ed3360f9b9de6cd0bf4b97c2e97c8139b352ee60ae6b6468d2d";
+        const string secret = "whsec_608c90673d8c66582a240f2a7b2f373e9d6762628bd012a56d8e576a342e91e7";
 
         public PaymentService(ICartService cartService,
             IAuthService authService,
             IOrderService orderService)
         {
-            StripeConfiguration.ApiKey = "sk_test_51L9YmXEh3MbtPZYO52v7wPziXLflV8ZUkpLSMZyrEu3cEjjXx6RlRFZUAtpKPr9NqGBBpfCMFVSk23sLqoFUOJqr00Y5yk3PPw";
+            StripeConfiguration.ApiKey = "sk_test_51LAW9JDzgYWwYAHDCVoS5agieA0KhSxX3rXTCuEjhMJfawm18PGQj45DtEMDj3LqjVcBkUZiwISL0EZsb409tv9h00qfNMMHwl";
 
             _cartService = cartService;
             _authService = authService;
@@ -31,7 +31,7 @@ namespace ComputerSpace.Server.Services.PaymentService
                 PriceData = new SessionLineItemPriceDataOptions
                 {
                     UnitAmountDecimal = product.Price * 100,
-                    Currency = "eur",
+                    Currency = "usd",
                     ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
                         Name = product.Title,
@@ -64,13 +64,24 @@ namespace ComputerSpace.Server.Services.PaymentService
             Session session = service.Create(options);
             return session;
         }
-        /*FulfillOrder nigdy się nie wywoływał*/
-        public async Task<ServiceResponse<bool>> FulfillOrder()
+
+        public async Task<ServiceResponse<bool>> FulfillOrder(HttpRequest request)
         {
+            var json = await new StreamReader(request.Body).ReadToEndAsync();
             try
             {
-                var user = _authService.GetUserId();
-                await _orderService.PlaceOrder(user);
+                var stripeEvent = EventUtility.ConstructEvent(
+                        json,
+                        request.Headers["Stripe-Signature"],
+                        secret
+                    );
+
+                if (stripeEvent.Type == Events.CheckoutSessionCompleted)
+                {
+                    var session = stripeEvent.Data.Object as Session;
+                    var user = await _authService.GetUserByEmail(session.CustomerEmail);
+                    await _orderService.PlaceOrder(user.Id);
+                }
 
                 return new ServiceResponse<bool> { Data = true };
             }
