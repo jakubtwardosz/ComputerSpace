@@ -18,7 +18,6 @@
             }
             else
             {
-
                 @foreach (var product in ProductService.Products)
                 {
 
@@ -51,7 +50,7 @@
                                     <div class="text-small mb-1">
                                         <a href="#!" class="text-decoration-none text-muted">
                                             <small>
-                                                Category name
+                                                @product.CategoryId @product.Category
                                             </small>
                                         </a>
                                     </div>
@@ -108,6 +107,7 @@
 
 
 @code {
+
     private Transition transition = Transition.Slide;
 
     protected override void OnInitialized()
