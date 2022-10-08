@@ -3,39 +3,42 @@
 @implements IDisposable
 @attribute [Authorize(Roles = "Admin")]
 
-<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Product Types</MudText>
-    <MudGrid Class="mt-16">
-        <MudItem xs="12">
-            
-        @foreach (var productType in ProductTypeService.ProductTypes)
-        {
-            @if(productType.Editing)
-            {
-                <EditForm Model="editingProductType" OnSubmit="UpdateProductType">
-                    <MudGrid>
-                        <MudItem xs="12" Class="d-flex justify-space-between">
-                            <InputText @bind-Value="editingProductType.Name" class="form-control"></InputText>                           
-                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Size="Size.Small">Upload</MudButton>                            
-                        </MudItem>
-                    </MudGrid>
-                </EditForm>
-            }
-            else
-            {
-                <MudGrid>
-                    <MudItem xs="12" Class="d-flex justify-space-between">
-                        <MudText>@productType.Name</MudText>
-                        <MudButton @onclick="@(() => EditProductType(productType))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Small">Edit</MudButton> 
-                    </MudItem>
-                </MudGrid>
-            }
-        }
-        <MudButton @onclick="CreateNewProductType" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Small" Class="mt-4">Add new product type</MudButton>  
-  
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+<h3>Product Types</h3>
+
+@foreach (var productType in ProductTypeService.ProductTypes)
+{
+    @if (productType.Editing)
+    {
+        <EditForm Model="editingProductType" OnSubmit="UpdateProductType">
+            <div class="row">
+                <div class="col">
+                    <InputText @bind-Value="editingProductType.Name" class="form-control"></InputText>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="oi oi-cloud-upload"></i>
+                    </button>
+                </div>
+            </div>
+        </EditForm>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col">
+                @productType.Name
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" @onclick="@(() => EditProductType(productType))">
+                    <i class="oi oi-pencil"></i>
+                </button>
+            </div>
+        </div>
+    }
+}
+<button class="btn btn-primary" @onclick="CreateNewProductType">
+    <i class="oi oi-plus"></i> Add new product type
+</button>
 
 @code {
     ProductType editingProductType = null;

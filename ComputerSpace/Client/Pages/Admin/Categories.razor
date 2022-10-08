@@ -3,64 +3,67 @@
 @attribute [Authorize(Roles = "Admin")]
 @implements IDisposable
 
-<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Categories</MudText>
-    <MudGrid Class="mt-16">
-        <MudItem xs="12">
+<h3>Categories</h3>
 
-            <MudGrid Class="pb-2 mb-2">
-                <MudItem xs="3"><b>Name</b></MudItem>
-                <MudItem xs="3"><b>Url</b></MudItem>
-                <MudItem xs="3"><b>Visible</b></MudItem>
-                <MudItem xs="3"></MudItem>
-            </MudGrid>
+<div class="header">
+    <div class="col">Name</div>
+    <div class="col">Url</div>
+    <div class="col">Visible</div>
+    <div class="col"></div>
+</div>
 
-            @foreach (var category in CategoryService.AdminCategories)
-            {
-                @if (category.Editing)
-                {
-                    <EditForm Model="editingCategory" OnSubmit="UpdateCategory">
-                        <MudGrid Class="pb-2 mb-2">
-                            <MudItem xs="3">
-                                <InputText @bind-Value="editingCategory.Name"></InputText>
-                            </MudItem>
-                            <MudItem xs="3">
-                                <InputText @bind-Value="editingCategory.Url"></InputText>
-                            </MudItem>
-                            <MudItem xs="3" Class="col-visible">
-                                <InputCheckbox @bind-Value="editingCategory.Visible"></InputCheckbox>
-                            </MudItem>
-                            <MudItem xs="3">
-                                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Size="Size.Small">Upload</MudButton>
-                                <MudButton @onclick="CancelEditing" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small">Cancel</MudButton>
-                            </MudItem>
-                        </MudGrid>
-                    </EditForm>
-                }
-                else
-                {
-                    <MudGrid Class="pb-2 mb-2">
-                        <MudItem xs="3">
-                            <MudText>@category.Name</MudText>
-                        </MudItem>
-                        <MudItem xs="3">
-                            <MudText>@category.Url</MudText> 
-                        </MudItem>
-                        <MudItem xs="3" Class="col-visible">
-                            @(category.Visible ? "✅" : "")
-                        </MudItem>
-                        <MudItem xs="3">
-                            <MudButton @onclick="(() => EditCategory(category))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Success" Size="Size.Small">Edit</MudButton>
-                            <MudButton @onclick="(() => DeleteCategory(category.Id))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small">Delete</MudButton>
-                        </MudItem>
-                    </MudGrid>
-                }
-            }            
-            <MudButton @onclick="CreateNewCategory" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Medium" Class="mt-2">Add new category</MudButton>
-
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+@foreach (var category in CategoryService.AdminCategories)
+{
+    @if (category.Editing)
+    {
+        <EditForm Model="editingCategory" OnSubmit="UpdateCategory">
+            <div class="row">
+                <div class="col">
+                    <InputText @bind-Value="editingCategory.Name" class="form-control"></InputText>
+                </div>
+                <div class="col">
+                    <InputText @bind-Value="editingCategory.Url" class="form-control"></InputText>
+                </div>
+                <div class="col col-visible">
+                    <InputCheckbox @bind-Value="editingCategory.Visible" style="transform: scale(1.5,1.5);"></InputCheckbox>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="oi oi-cloud-upload"></i>
+                    </button>
+                    <button class="btn btn-primary" @onclick="CancelEditing">
+                        <i class="oi oi-circle-x"></i>
+                    </button>
+                </div>
+            </div>
+        </EditForm>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col">
+                @category.Name
+            </div>
+            <div class="col">
+                @category.Url
+            </div>
+            <div class="col col-visible">
+                <span>@(category.Visible ? "✔️" : "")</span>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" @onclick="(() => EditCategory(category))">
+                    <i class="oi oi-pencil"></i>
+                </button>
+                <button class="btn btn-primary" @onclick="(() => DeleteCategory(category.Id))">
+                    <i class="oi oi-trash"></i>
+                </button>
+            </div>
+        </div>
+    }
+}
+<button class="btn btn-primary" @onclick="CreateNewCategory">
+    <i class="oi oi-plus"></i> Add new category
+</button>
 
 @code {
     Category editingCategory = null;
