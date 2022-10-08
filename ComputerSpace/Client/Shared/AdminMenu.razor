@@ -3,11 +3,10 @@
 
 @if (authorized)
 {
-    <MudDivider />
-    <MudMenuItem Href="admin/categories">Categories</MudMenuItem>
-    <MudMenuItem Href="admin/product-types">Product Types</MudMenuItem>
-    <MudMenuItem Href="admin/products">Products</MudMenuItem>
-    <MudDivider />
+    <a class="dropdown-item" href="admin/categories">Categories</a>
+    <a class="dropdown-item" href="admin/product-types">Product Types</a>
+    <a class="dropdown-item" href="admin/products">Products</a>
+    <hr />
 }
 
 @code {

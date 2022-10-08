@@ -1,55 +1,34 @@
 ﻿@page "/orders"
 @inject IOrderService OrderService
 
-<PageTitle>Orders</PageTitle>
+<h3>Orders</h3>
 
-<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Orders</MudText>
+@if (orders == null)
+{
+    <span>Loading your orders...</span>
+}
+else if (orders.Count <= 0)
+{
+    <span>You have no orders, yet.</span>
+}
+else
+{
+    foreach (var order in orders)
+    {
+        <div class="container">
+            <div class="image-wrapper">
+                <img src="@order.ProductImageUrl" class="image" />
+            </div>
+            <div class="details">
+                <h4>@order.Product</h4>
+                <span>@order.OrderDate</span><br />
+                <a href="orders/@order.Id">Show more...</a>
+            </div>
+            <div class="order-price">$@order.TotalPrice</div>
+        </div>
+    }
+}
 
-    <MudGrid Class="mt-16">
-        <MudItem xs="12">
-            @if (orders == null)
-            {
-                <MudText>Loading your orders...</MudText>
-            }
-            else if (orders.Count <= 0)
-            {
-                <MudText>You have no orders, yet.</MudText>
-            }
-            else
-            {
-                <MudSimpleTable Style="overflow-x: auto;" Class="mt-8" Elevation="1" Dense="true">
-                    <thead>
-                        <tr>
-
-                            <th>Image</th>
-                            <th>Order</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var order in orders)
-                        {
-                            <tr>
-
-                                <td><MudImage Src="@order.ProductImageUrl" Width="154" Height="133" Elevation="0" /></td>
-                                <td>
-                                    <MudText>@order.Product</MudText>
-                                    <MudText Typo="Typo.body2">@order.OrderDate</MudText>
-                                    <a href="orders/@order.Id" class="order-link"><MudText Typo="Typo.body2">Show more...</MudText></a>
-                                </td>
-                                <td><MudText>@order.TotalPrice zł</MudText></td>
-                               
-                            </tr>
-                        }
-                    </tbody>
-                </MudSimpleTable>
-            }
-        </MudItem>
-
-    </MudGrid>
-
-</MudContainer>
 
 @code {
     List<OrderOverviewResponse> orders = null;

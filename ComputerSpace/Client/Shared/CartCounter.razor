@@ -2,10 +2,10 @@
 @inject ISyncLocalStorageService LocalStorage
 @implements IDisposable
 
-<MudBadge Content="@GetCartItemsCount()" Overlap="true" Class="d-flex mx-4">
-    <MudIconButton Icon="@Icons.Filled.ShoppingCart" Color="Color.Default" Class="pa-3" Href="/cart" />
-</MudBadge>
-
+<a href="cart" class="btn btn-info">
+    <i class="oi oi-cart"></i>
+    <span class="badge">@GetCartItemsCount()</span>
+</a>
 
 @code {
     private int GetCartItemsCount()
@@ -23,5 +23,4 @@
     {
         CartService.OnChange -= StateHasChanged;
     }
-
 }

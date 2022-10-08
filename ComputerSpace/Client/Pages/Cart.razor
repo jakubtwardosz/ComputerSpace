@@ -4,69 +4,53 @@
 @inject IAuthService AuthService
 @inject NavigationManager NavigationManager
 
-<PageTitle>Cart</PageTitle>
+<PageTitle>Shopping Cart</PageTitle>
 
-<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Cart</MudText>
+<h3>Shopping Cart</h3>
 
-    @if (cartProducts == null || cartProducts.Count == 0)
+@if (cartProducts == null || cartProducts.Count == 0)
+{
+    <span>@message</span>
+}
+else
+{
+    <div>
+        @foreach (var product in cartProducts)
+        {
+            <div class="container">
+                <div class="image-wrapper">
+                    <img src="@product.ImageUrl" class="image" />
+                </div>
+                <div class="name">
+                    <h5><a href="/product/@product.ProductId">@product.Title</a></h5>
+                    <span>@product.ProductType</span><br />
+                    <input type="number" value="@product.Quantity"
+                   @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
+                   class="form-control input-quantity"
+                   min="1" />
+                    <button class="btn-delete" @onclick="@(() =>
+                        RemoveProductFromCart(product.ProductId, product.ProductTypeId))">
+                        Delete
+                    </button>
+                </div>
+                <div class="cart-product-price">$@(product.Price * product.Quantity)</div>
+            </div>
+        }
+        <div class="cart-product-price">
+            Total (@cartProducts.Count): $@cartProducts.Sum(product => @product.Price * product.Quantity)
+        </div>
+    </div>
+    @if (isAuthenticated)
     {
-        <MudText Align="Align.Center">@message</MudText>
+        <div>
+            <h5>Delivery Address</h5>
+            <AddressForm />
+        </div>
     }
-    else
-    {
-        <MudSimpleTable Style="overflow-x: auto;" Class="mt-16" Elevation="1" Dense="true">
-            <thead>
-                <tr>
+    <button @onclick="PlaceOrder" class="btn alert-success float-end mt-1">Checkout</button>
+}
 
-                    <th>Image</th>
-                    <th>Product name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in cartProducts)
-                {
-                    <tr>
 
-                        <td><MudImage Src="@product.ImageUrl" Width="154" Height="133" Elevation="0" /></td>
-                        <td>
-                            <a href="/product/@product.ProductId"><MudText>@product.Title</MudText></a>
-                            <MudText>@product.ProductType</MudText>
-                        </td>
-                        <td><MudText>@(product.Price * product.Quantity) zł</MudText></td>
-                        <td>
-                            <input type="number" value="@product.Quantity" class="input-quantity"
-                           @onchange="@((ChangeEventArgs e) => UpdateQuantity(e, product))"
-                           min="1" />
-                        </td>
-                        <td>
-                            <MudIconButton Icon="@Icons.Material.Filled.Delete" @onclick="@(() => RemoveProductFromCart(product.ProductId, product.ProductTypeId))" Variant="Variant.Filled" DisableElevation="true" Color="Color.Error" Size="Size.Small" />
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </MudSimpleTable>
-
-        <MudGrid Class="mt-8">
-            <MudItem xs="12">
-                <MudText Typo="Typo.h6" Align="Align.End">Total price (@cartProducts.Count): @cartProducts.Sum(product => @product.Price * product.Quantity) zł</MudText>
-            </MudItem>
-            @if (isAuthenticated)
-            {
-                <MudItem xs="12">
-                    <MudText Typo="Typo.h5" GutterBottom="true">Delivery Address</MudText>
-                    <AddressForm />
-                </MudItem>
-            }
-            <MudItem xs="12" Class="d-flex justify-end">
-                <MudButton @onclick="PlaceOrder" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Checkout</MudButton>
-            </MudItem>
-        </MudGrid>
-    }
-</MudContainer>
 
 @code {
     List<CartProductResponse> cartProducts = null;
@@ -89,7 +73,6 @@
     {
         await CartService.GetCartItemsCount();
         cartProducts = await CartService.GetCartProducts();
-
         if (cartProducts == null || cartProducts.Count == 0)
         {
             message = "Your cart is empty.";

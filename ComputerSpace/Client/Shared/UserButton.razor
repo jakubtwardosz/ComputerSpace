@@ -3,23 +3,45 @@
 @inject NavigationManager NavigationManager
 @inject ICartService CartService
 
-<MudMenu Icon="@Icons.Filled.Person" AnchorOrigin="Origin.BottomLeft" TransformOrigin="Origin.TopLeft">
-    <AuthorizeView>
-        <Authorized>
-            <MudMenuItem href="profile">Profile</MudMenuItem>
-            <MudMenuItem href="orders">Orders</MudMenuItem>
-            <AdminMenu />
-            <MudMenuItem @onclick="Logout">Logout</MudMenuItem>
-        </Authorized>
-        <NotAuthorized>
-            <MudMenuItem href="login">Login</MudMenuItem>
-            <MudMenuItem href="register">Register</MudMenuItem>
-        </NotAuthorized>
-    </AuthorizeView>
-</MudMenu>
-
+<div class="dropdown">
+    <button @onclick="ToggleUserMenu"
+            @onfocusout="HideUserMenu"
+            class="btn btn-secondary dropdown-toggle user-button">
+        <i class="oi oi-person"></i>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <a href="profile" class="dropdown-item">Profile</a>
+                <a href="orders" class="dropdown-item">Orders</a>
+                <hr />
+                <AdminMenu />
+                <button class="dropdown-item" @onclick="Logout">Logout</button>
+            </Authorized>
+            <NotAuthorized>
+                <a href="login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Login</a>
+                <a href="register" class="dropdown-item">Register</a>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>
 
 @code {
+    private bool showUserMenu = false;
+
+    private string UserMenuCssClass => showUserMenu ? "show-menu" : null;
+
+    private void ToggleUserMenu()
+    {
+        showUserMenu = !showUserMenu;
+    }
+
+    private async Task HideUserMenu()
+    {
+        await Task.Delay(200);
+        showUserMenu = false;
+    }
+
     private async Task Logout()
     {
         await LocalStorage.RemoveItemAsync("authToken");
