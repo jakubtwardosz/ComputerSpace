@@ -1,0 +1,36 @@
+﻿@inject ICategoryService CategoryService
+@implements IDisposable
+
+<div class="border-bottom pb-lg-4 pb-3">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-default pt-0 pb-0">
+        <div class="container px-0 px-md-3">
+            <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">      
+                <div class="d-none d-lg-block">
+                    <ul class="navbar-nav">
+                        @foreach (var category in CategoryService.Categories)
+                        {
+                            <div class="nav-item">
+                                <NavLink class="nav-link" href="@category.Url">
+                                    @category.Name
+                                </NavLink>
+                            </div>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await CategoryService.GetCategories();
+        CategoryService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CategoryService.OnChange -= StateHasChanged;
+    }
+}
