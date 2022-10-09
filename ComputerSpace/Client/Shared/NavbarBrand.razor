@@ -2,9 +2,9 @@
 
 
 <div class="col-xxl-2 col-lg-3">
-    <button class="navbar-brand d-none d-lg-block" @onclick="GoToHome">
+    <a class="navbar-brand d-none d-lg-block" type="button" @onclick="GoToHome">
         Computer Space
-    </button>
+    </a>
 </div>
 
 
@@ -17,7 +17,7 @@
 
         <div class="list-inline me-2">
             <div class="list-inline-item">
-                <button class="navbar-toggler @NavMenuCssClass" @onclick="ToggleNavMenu" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="btn btn-primary navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbar-categories" aria-controls="navbar-categories" aria-expanded="false" aria-label="Toggle navigation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                     </svg>
@@ -28,18 +28,16 @@
     </div>
 </div>
 
-
-
 @code {
-    private bool collapseNavMenu = true;
+    /*  private bool collapseNavMenu = true;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+        private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
+        private void ToggleNavMenu()
+        {
+            collapseNavMenu = !collapseNavMenu;
+        }
+    */
     private void GoToHome()
     {
         NavigationManager.NavigateTo("");
