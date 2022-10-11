@@ -1,15 +1,17 @@
-﻿@inject ICategoryService CategoryService
+﻿@inject NavigationManager NavigationManager
+@inject ICategoryService CategoryService
 @implements IDisposable
 
 <div class="border-bottom pb-lg-4 pb-3">
     <nav class="navbar navbar-expand-lg navbar-light navbar-default pt-0 pb-0">
-        <div class="container px-0 px-md-3">
+        <div class="container">
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-categories">
                 <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="./index.html"><img src="./assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template"></a>
+                    <a class="navbar-brand" @onclick="GoToHome">Computer Space</a>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div class="d-none d-lg-block">
+
+                <div class="d-lg-block">
                     <ul class="navbar-nav">
                         @foreach (var category in CategoryService.Categories)
                         {
@@ -28,6 +30,11 @@
 
 
 @code {
+    private void GoToHome()
+    {
+        NavigationManager.NavigateTo("");
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await CategoryService.GetCategories();

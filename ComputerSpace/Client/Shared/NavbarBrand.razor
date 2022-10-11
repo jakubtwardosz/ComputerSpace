@@ -9,7 +9,7 @@
 
 
 <div class="d-flex justify-content-between w-100 d-lg-none">
-    <a class="navbar-brand" @onclick="GoToHome">
+    <a class="navbar-brand" type="button" @onclick="GoToHome">
         Computer Space
     </a>
 
@@ -23,21 +23,15 @@
                     </svg>
                 </button>
             </div>
-            <CartCounter />
+            <div class="list-inline-item">
+                <UserButton />
+                <CartCounter />
+            </div>
         </div>
     </div>
 </div>
 
 @code {
-    /*  private bool collapseNavMenu = true;
-     * 
-        private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-        private void ToggleNavMenu()
-        {
-            collapseNavMenu = !collapseNavMenu;
-        }
-    */
     private void GoToHome()
     {
         NavigationManager.NavigateTo("");
