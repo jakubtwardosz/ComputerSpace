@@ -1,32 +1,22 @@
 ﻿@inject NavigationManager NavigationManager
 @inject IProductService ProductService
 
-
-<div class="col-xxl-6 col-lg-7 d-none d-lg-block">
-    <div class="input-group">
-        <input @bind-value="searchText"
-               @bind-value:event="oninput"
-               type="search"
-               list="products"
-               @onkeyup="HandleSearch"
-               class="form-control rounded-3"
-               placeholder="Search for products"
-               id="searchInput"
-               @ref="searchInput" />
-        <datalist id="products">
-            @foreach (var suggestion in suggestions)
-            {
-                <option>@suggestion</option>
-            }
-        </datalist>
-        <span class="input-group-append mx-3">
-            <button class="btn btn-primary" type="button" @onclick="SearchProducts">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-            </button>
-        </span>
-    </div>
+<div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+    <input @bind-value="searchText"
+           @bind-value:event="oninput"
+           type="search"
+           list="products"
+           @onkeyup="HandleSearch"
+           class="form-control"
+           placeholder="Search..."
+           @ref="searchInput"
+           aria-label="Search">
+    <datalist id="products">
+        @foreach (var suggestion in suggestions)
+        {
+            <option>@suggestion</option>
+        }
+    </datalist>
 </div>
 
 @code {
