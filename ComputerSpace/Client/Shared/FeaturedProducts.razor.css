@@ -49,7 +49,7 @@
 
 
 .card-product .btn-action:hover {
-    background-color: #0aad0a;
+    background-color: var(--bs-primary);
     color: #fff;
 }
 
