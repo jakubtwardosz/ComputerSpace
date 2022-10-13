@@ -1,13 +1,11 @@
 ﻿@inject IProductService ProductService
 @implements IDisposable
 
-<section class="my-lg-14 my-8">
+<section class="mb-lg-4 mt-lg-5 my-5">
     <div class="container">
         <div class="row">
-            <div class="col-12 mb-6">
-
+            <div class="col-12 mb-4">
                 <h3 class="mb-0">Popular Products</h3>
-
             </div>
         </div>
 
@@ -41,19 +39,11 @@
                                         </a>
 
                                         <div class="card-product-action">
-                                            <a href="#!" class="btn-action" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="bi bi-eye" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Quick View"></i></a>
                                             <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Wishlist"><i class="bi bi-heart"></i></a>
-                                            <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" aria-label="Compare"><i class="bi bi-arrow-left-right"></i></a>
                                         </div>
 
                                     </div>
-                                    <div class="text-small mb-1">
-                                        <a href="#!" class="text-decoration-none text-muted">
-                                            <small>
-                                                @product.CategoryId @product.Category
-                                            </small>
-                                        </a>
-                                    </div>
+
                                     <h2 class="fs-6">
                                         <a href="product/@product.Id" class="text-inherit text-decoration-none">
                                             @product.Title
@@ -71,14 +61,13 @@
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <div>
-                                            <span class="text-dark">$@product.Variants[0].Price</span> <span class="text-decoration-line-through text-muted">$24</span>
+                                            <span class="text-dark">$@product.Variants[0].Price</span> <span class="text-decoration-line-through text-muted">$@product.Variants[0].OriginalPrice</span>
                                         </div>
                                         <div>
                                             <a href="#!" class="btn btn-primary btn-sm">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                </svg> Add
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                </svg>
                                             </a>
                                         </div>
                                     </div>
@@ -92,19 +81,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @code {
 
