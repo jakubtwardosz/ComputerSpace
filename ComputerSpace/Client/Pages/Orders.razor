@@ -1,34 +1,77 @@
 ﻿@page "/orders"
 @inject IOrderService OrderService
 
-<h3>Orders</h3>
+<section>
+    <div class="container">
+        <div class="col-12">
+            <h2 class="mb-5">Your Orders</h2>
+            @if (orders == null)
+            {
+                <span>Loading your orders...</span>
+            }
+            else if (orders.Count <= 0)
+            {
+                <span>You have no orders, yet.</span>
+            }
+            else
+            {
+                <div class="table-responsive border-0">
+                    <table class="table mb-0 text-nowrap">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="border-0">&nbsp;</th>
+                                <th class="border-0">Product</th>
+                                <th class="border-0">Date</th>
+                                <th class="border-0">Status</th>
+                                <th class="border-0">Amount</th>
 
-@if (orders == null)
-{
-    <span>Loading your orders...</span>
-}
-else if (orders.Count <= 0)
-{
-    <span>You have no orders, yet.</span>
-}
-else
-{
-    foreach (var order in orders)
-    {
-        <div class="container">
-            <div class="image-wrapper">
-                <img src="@order.ProductImageUrl" class="image" />
-            </div>
-            <div class="details">
-                <h4>@order.Product</h4>
-                <span>@order.OrderDate</span><br />
-                <a href="orders/@order.Id">Show more...</a>
-            </div>
-            <div class="order-price">$@order.TotalPrice</div>
-        </div>
-    }
-}
+                                <th class="border-0"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in orders)
+                            {
+                            <tr>
+                                <td class="align-middle border-top-0 w-0">
+                                    <a href="#"> <img src="@order.ProductImageUrl" class="img-fluid"></a>
+                                </td>
+                                <td class="align-middle border-top-0">
+                                    <a href="#" class="fw-semi-bold text-inherit">
+                                        <h6 class="mb-0">@order.Product</h6>
+                                    </a>
+                                </td>
+                                <td class="align-middle border-top-0">
+                                    @order.OrderDate
+                                </td>
+                                <td class="align-middle border-top-0">
+                                    <span class="badge bg-warning">Processing</span>
+                                </td>
+                                <td class="align-middle border-top-0">
+                                    $@order.TotalPrice
+                                </td>
+                                <td class="text-muted align-middle border-top-0">
+                                    <a href="orders/@order.Id" class="text-inherit"><i class="feather-icon icon-eye"></i></a>
+                                </td>
+                            </tr>
+                            }
 
+                        </tbody>
+                    </table>
+                </div>
+
+
+                
+               
+               
+
+
+
+
+
+            }
+        </div>        
+    </div>
+</section>
 
 @code {
     List<OrderOverviewResponse> orders = null;
