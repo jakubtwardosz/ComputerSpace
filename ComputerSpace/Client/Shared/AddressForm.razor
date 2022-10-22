@@ -2,55 +2,52 @@
 
 @if (address == null)
 {
-    <span>
-        You haven't specified a delivery address, yet.
-        <button class="btn" @onclick="InitAddress">Add an address?</button>
-    </span>
+    <p>You haven't specified a delivery address, yet.</p>
+    <button class="btn btn-primary mb-2" @onclick="InitAddress">Add an address?</button>
 }
 else if (!editAddress)
 {
-    <ul class="list-unstyled fs-sm">
+    <ul class="list-unstyled">
         <li><span class="text-muted">Client:&nbsp;</span>@address.FirstName @address.LastName</li>
-        <li><span class="text-muted">Address:&nbsp;</span>@address.Street, @address.City, @address.State, @address.Zip</li>
-        <li><span class="text-muted">Coutnry:&nbsp;</span>@address.Country</li>
+        <li><span class="text-muted">Address:&nbsp;</span>@address.Street, @address.City, @address.Zip</li>
+        <li><span class="text-muted">Coutnry:&nbsp;</span>@address.State, @address.Country</li>
     </ul>
-    <button class="btn btn-primary" @onclick="EditAddress">Edit</button>
+    <button class="btn btn-primary mb-2" @onclick="EditAddress">Edit</button>
 }
 else
 {
     <EditForm Model="address" OnSubmit="SubmitAddress">
-        <div class="row g-3">
-            <div class="col-sm-6">
+        <div class="row g-2 mb-3">
+            <div class="col-6">
                 <label for="firstname" class="form-label">First Name</label>
                 <InputText id="firstname" @bind-Value="address.FirstName" class="form-control" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <label for="lastname" class="form-label">Last Name</label>
                 <InputText id="lastname" @bind-Value="address.LastName" class="form-control" />
             </div>
-            <div class="col-sm-12">
+            <div class="col-12">
                 <label for="street" class="form-label">Street</label>
                 <InputText id="street" @bind-Value="address.Street" class="form-control" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <label for="city" class="form-label">City</label>
                 <InputText id="city" @bind-Value="address.City" class="form-control" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <label for="state" class="form-label">State</label>
                 <InputText id="state" @bind-Value="address.State" class="form-control" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <label for="zip" class="form-label">ZIP/Postal Code</label>
                 <InputText id="zip" @bind-Value="address.Zip" class="form-control" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-6">
                 <label for="country" class="form-label">Country</label>
                 <InputText id="country" @bind-Value="address.Country" class="form-control" />
             </div>
-            <hr class="my-4">
-            <button class="btn btn-primary" type="submit">Save</button>
         </div>
+        <button class="btn btn-primary mb-2" type="submit">Save</button>
     </EditForm>
 }
 
