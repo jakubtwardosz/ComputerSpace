@@ -5,67 +5,72 @@
 
 <div class="container">
 
-    <h3>Categories</h3>
-
-    <div class="row border-bottom">
-        <div class="col">Name</div>
-        <div class="col">Url</div>
-        <div class="col">Visible</div>
-        <div class="col"></div>
+    <div class="col-12">
+        <div class="mb-4">
+            <h2 class="mb-0">Categories</h2>
+        </div>
     </div>
+    <div class="col-12 mb-5">
+        <div class="row mb-3">
+            <div class="col"><strong>Name</strong></div>
+            <div class="col"><strong>Url</strong></div>
+            <div class="col"><strong>Visible</strong></div>
+            <div class="col">&nbsp;</div>
+        </div>
 
-    @foreach (var category in CategoryService.AdminCategories)
-    {
-        @if (category.Editing)
+        @foreach (var category in CategoryService.AdminCategories)
         {
-            <EditForm Model="editingCategory" OnSubmit="UpdateCategory">
-                <div class="row">
+            @if (category.Editing)
+            {
+                <EditForm Model="editingCategory" OnSubmit="UpdateCategory">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <InputText class="form-control" @bind-Value="editingCategory.Name"></InputText>
+                        </div>
+                        <div class="col">
+                            <InputText class="form-control" @bind-Value="editingCategory.Url"></InputText>
+                        </div>
+                        <div class="col">
+                            <InputCheckbox class="form-check-input" @bind-Value="editingCategory.Visible"></InputCheckbox>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" @onclick="CancelEditing">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </EditForm>
+            }
+            else
+            {
+                <div class="row mb-2">
                     <div class="col">
-                        <InputText @bind-Value="editingCategory.Name"></InputText>
+                        @category.Name
                     </div>
                     <div class="col">
-                        <InputText @bind-Value="editingCategory.Url"></InputText>
+                        @category.Url
                     </div>
                     <div class="col">
-                        <InputCheckbox @bind-Value="editingCategory.Visible"></InputCheckbox>
+                        <span>@(category.Visible ? "Yes" : "No")</span>
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="oi oi-cloud-upload"></i>
+                        <button class="btn btn-primary btn-sm" @onclick="(() => EditCategory(category))">
+                            <i class="bi bi-pencil"></i>
                         </button>
-                        <button class="btn btn-primary" @onclick="CancelEditing">
-                            <i class="oi oi-circle-x"></i>
+                        <button class="btn btn-primary btn-sm" @onclick="(() => DeleteCategory(category.Id))">
+                            <i class="bi bi-trash"></i>
                         </button>
                     </div>
                 </div>
-            </EditForm>
+            }
         }
-        else
-        {
-            <div class="row">
-                <div class="col">
-                    @category.Name
-                </div>
-                <div class="col">
-                    @category.Url
-                </div>
-                <div class="col">
-                    <span>@(category.Visible ? "✔️" : "")</span>
-                </div>
-                <div class="col">
-                    <button class="btn btn-primary" @onclick="(() => EditCategory(category))">
-                        <i class="oi oi-pencil"></i>
-                    </button>
-                    <button class="btn btn-primary" @onclick="(() => DeleteCategory(category.Id))">
-                        <i class="oi oi-trash"></i>
-                    </button>
-                </div>
-            </div>
-        }
-    }
-    <button class="btn btn-primary" @onclick="CreateNewCategory">
-        <i class="oi oi-plus"></i> Add new category
-    </button>
+        <button class="btn btn-primary" @onclick="CreateNewCategory">
+            <i class="bi bi-plus-lg"></i> Add new category
+        </button>
+    </div>
 </div>
 
 @code {
