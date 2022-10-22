@@ -1,77 +1,62 @@
 ﻿@page "/orders"
 @inject IOrderService OrderService
 
-<section>
-    <div class="container">
-        <div class="col-12">
-            <h2 class="mb-5">Your Orders</h2>
-            @if (orders == null)
-            {
-                <span>Loading your orders...</span>
-            }
-            else if (orders.Count <= 0)
-            {
-                <span>You have no orders, yet.</span>
-            }
-            else
-            {
-                <div class="table-responsive border-0">
-                    <table class="table mb-0 text-nowrap">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="border-0">&nbsp;</th>
-                                <th class="border-0">Product</th>
-                                <th class="border-0">Date</th>
-                                <th class="border-0">Status</th>
-                                <th class="border-0">Amount</th>
+<div class="container">
+    <div class="col-12">
+        <div class="mb-4">
+            <h2 class="mb-0">Your Orders</h2>
+        </div>
+    </div>
 
-                                <th class="border-0"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var order in orders)
-                            {
+    <div class="col-12 mb-5">
+        @if (orders == null)
+        {
+            <p>Loading your orders...</p>
+        }
+        else if (orders.Count <= 0)
+        {
+            <p>You have no orders, yet.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead class="table-light">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Product</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in orders)
+                        {
                             <tr>
-                                <td class="align-middle border-top-0 w-0">
-                                    <a href="#"> <img src="@order.ProductImageUrl" class="img-fluid"></a>
+                                <td class="align-middle">
+                                    <img src="@order.ProductImageUrl" alt="@order.Product" class="order-image" />
                                 </td>
-                                <td class="align-middle border-top-0">
-                                    <a href="#" class="fw-semi-bold text-inherit">
-                                        <h6 class="mb-0">@order.Product</h6>
-                                    </a>
+                                <td class="align-middle">
+                                    <h6 class="mb-0">@order.Product</h6>
                                 </td>
-                                <td class="align-middle border-top-0">
+                                <td class="align-middle">
                                     @order.OrderDate
                                 </td>
-                                <td class="align-middle border-top-0">
-                                    <span class="badge bg-warning">Processing</span>
-                                </td>
-                                <td class="align-middle border-top-0">
+                                <td class="align-middle">
                                     $@order.TotalPrice
                                 </td>
-                                <td class="text-muted align-middle border-top-0">
-                                    <a href="orders/@order.Id" class="text-inherit"><i class="feather-icon icon-eye"></i></a>
+                                <td class="align-middle text-muted">
+                                    <a href="orders/@order.Id">Show more...</a>
                                 </td>
                             </tr>
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-
-
-                
-               
-               
-
-
-
-
-
-            }
-        </div>        
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
     </div>
-</section>
+</div>
 
 @code {
     List<OrderOverviewResponse> orders = null;

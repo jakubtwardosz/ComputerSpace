@@ -1,34 +1,61 @@
 ﻿@page "/orders/{orderId:int}"
 @inject IOrderService OrderService
 
-@if (order == null)
-{
-    <span>Loading order...</span>
-}
-else
-{
-    <h3>Order from @order.OrderDate</h3>
-
-    <div>
-        @foreach (var product in order.Products)
-        {
-            <div class="container">
-                <div class="image-wrapper">
-                    <img src="@product.ImageUrl" class="image" />
-                </div>
-                <div class="name">
-                    <h5><a href="/product/@product.ProductId">@product.Title</a></h5>
-                    <span>@product.ProductType</span><br />
-                    <span>Quantity: @product.Quantity</span>
-                </div>
-                <div class="product-price">$@product.TotalPrice</div>
+<div class="container">
+    @if (order == null)
+    {
+        <p>Loading order...</p>
+    }
+    else
+    {
+        <div class="col-12">
+            <div class="mb-4">
+                <h2 class="mb-0">Order from @order.OrderDate</h2>
             </div>
-        }
-        <div class="product-price">
-            Total: $@order.TotalPrice
         </div>
-    </div>
-}
+
+        <div class="col-12 mb-5">
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead class="table-light">
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Product title</th>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in order.Products)
+                        {
+                            <tr>
+                                <td class="align-middle">
+                                    <img src="@product.ImageUrl" alt="@product.ProductType" class="order-image" />
+                                </td>
+                                <td class="align-middle">
+                                    <h6 class="mb-0"><a href="/product/@product.ProductId">@product.Title</a></h6>
+                                </td>
+                                <td class="align-middle">
+                                    @product.ProductType
+                                </td>
+                                <td class="align-middle">
+                                    @product.Quantity
+                                </td>
+                                <td class="align-middle">
+                                    $@product.TotalPrice
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-end">
+                <h5 class="md-0">Total: <strong>$@order.TotalPrice</strong></h5>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter]
