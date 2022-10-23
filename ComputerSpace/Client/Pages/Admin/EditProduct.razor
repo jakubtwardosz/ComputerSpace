@@ -9,128 +9,127 @@
 <div class="container">
     @if (loading)
     {
-        <span>@msg</span>
+        <p>@msg</p>
     }
     else
     {
         @if (product.Editing)
         {
-            <h3>Edit "@product.Title"</h3>
+            <div class="col-12">
+                <div class="mb-4">
+                    <h2 class="mb-0">Edit "@product.Title"</h2>
+                </div>
+            </div>
         }
         else if (product.IsNew)
         {
-            <h3>Create a new Product</h3>
-        }
-
-        <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
-            <DataAnnotationsValidator></DataAnnotationsValidator>
-            <div class="mb-0">
-                <label for="title">Title</label>
-                <InputText id="title" @bind-Value="product.Title" class="form-control"></InputText>
-            </div>
-            <div class="mb-0">
-                <label for="imageUrl">Image Url</label>
-                <InputText id="imageUrl" @bind-Value="product.ImageUrl" class="form-control"></InputText>
-            </div>
-            <div class="mb-0" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
-                @if (!string.IsNullOrEmpty(product.ImageUrl))
-                {
-                    <img src="@product.ImageUrl" />
-                }
-                else
-                {
-                    foreach (var image in product.Images)
-                    {
-                        @*                                <MudCard Class="ma-2">
-            <MudCardContent>
-            <MudImage Src="@image.Data" />
-            </MudCardContent>
-            <MudCardActions Style="justify-content: center;">
-            <MudButton Variant="Variant.Filled"
-            Color="Color.Error"
-            OnClick="@(() => RemoveImage(image.Id))">
-            Remove
-            </MudButton>
-            </MudCardActions>
-            </MudCard>*@
-                    }
-                }
-            </div>
-            <div class="mb-0">
-                <label for="images">Image(s)</label>
-                <InputFile id="images" OnChange="OnFileChange" multiple class="form-control"></InputFile>
-            </div>
-            <div class="mb-0">
-                <label for="description">Description</label>
-                <InputTextArea id="description" @bind-Value="product.Description" class="form-control"></InputTextArea>
-            </div>
-            <hr />
-            <div class="header">
-                <div class="col">Product Type / Variant</div>
-                <div class="col">Price</div>
-                <div class="col">Original Price</div>
-                <div class="col">Visible</div>
-                <div class="col"></div>
-            </div>
-            @foreach (var variant in product.Variants)
-            {
-                <div class="row">
-                    <div class="col">
-                        <InputSelect disabled="@variant.Deleted" @bind-Value="variant.ProductTypeId" class="form-control">
-                            @foreach (var productType in ProductTypeService.ProductTypes)
-                            {
-                                <option value="@productType.Id.ToString()">@productType.Name</option>
-                            }
-                        </InputSelect>
-                    </div>
-                    <div class="col">
-                        <InputNumber @bind-Value="variant.Price" class="form-control" disabled="@variant.Deleted"></InputNumber>
-                    </div>
-                    <div class="col">
-                        <InputNumber @bind-Value="variant.OriginalPrice" class="form-control" disabled="@variant.Deleted"></InputNumber>
-                    </div>
-                    <div class="col col-visible">
-                        <InputCheckbox @bind-Value="variant.Visible" style="transform:scale(1.5,1.5);" disabled="@variant.Deleted"></InputCheckbox>
-                    </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-primary" disabled="@variant.Deleted" @onclick="@(() => RemoveVariant(variant.ProductTypeId))">
-                            <i class="oi oi-trash"></i>
-                        </button>
-                    </div>
+            <div class="col-12">
+                <div class="mb-4">
+                    <h2 class="mb-0">Create a new Product</h2>
                 </div>
-            }
-            <button type="button" class="btn btn-primary" @onclick="AddVariant">
-                <i class="oi oi-plus"></i> Add Variant
-            </button>
-            <hr />
-            <div class="mb-0">
-                <label for="category">Category</label>
-                <InputSelect id="category" @bind-Value="product.CategoryId" class="form-control">
-                    @foreach (var category in CategoryService.AdminCategories)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                </InputSelect>
             </div>
-            <hr />
-            <div class="form-check">
-                <InputCheckbox id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
-                <label for="featured" class="form-check-label">Featured</label>
-            </div>
-            <div class="form-check">
-                <InputCheckbox id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
-                <label for="visible" class="form-check-label">Visible</label>
-            </div>
-            <hr />
-            <button type="submit" class="btn btn-primary float-end">@btnText</button>
-            <ValidationSummary></ValidationSummary>
-        </EditForm>
-        @if (!product.IsNew)
-        {
-            <button type="button" class="btn btn-danger float-start" @onclick="DeleteProduct">
-                Delete Product
-            </button>
         }
+        <div class="col-12 mb-5">
+            <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <InputText type="text" class="form-control" id="title" @bind-Value="product.Title"></InputText>
+                </div>
+                <div class="mb-3">
+                    <label for="imageUrl" class="form-label">Image Url</label>
+                    <InputText type="text" class="form-control" id="imageUrl" @bind-Value="product.ImageUrl"></InputText>
+                </div>
+                <div class="mb-3 edit-product-image">
+                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                    {
+                        <img src="@product.ImageUrl" class="img-fluid" alt="@product.Title" />
+                    }
+                    else
+                    {
+                        foreach (var image in product.Images)
+                        {
+                            <p>Image carousel</p>
+                        }
+                    }
+                </div>
+                <div class="mb-3">
+                    <label for="images" class="form-label">Image(s)</label>
+                    <InputFile type="file" class="form-control" id="images" OnChange="OnFileChange" multiple></InputFile>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <InputTextArea class="form-control" id="description" @bind-Value="product.Description"></InputTextArea>
+                </div>
+
+                <div class="mb-2">
+                    <div class="row mb-3">
+                        <div class="col"><strong>Product Type / Variant</strong></div>
+                        <div class="col"><strong>Price</strong></div>
+                        <div class="col"><strong>Original Price</strong></div>
+                        <div class="col"><strong>Visible</strong></div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    @foreach (var variant in product.Variants)
+                    {
+                        <div class="row mb-2">
+                            <div class="col">
+                                <InputSelect disabled="@variant.Deleted" @bind-Value="variant.ProductTypeId" class="form-select">
+                                    @foreach (var productType in ProductTypeService.ProductTypes)
+                                    {
+                                        <option value="@productType.Id.ToString()">@productType.Name</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                            <div class="col">
+                                <InputNumber type="number" @bind-Value="variant.Price" class="form-control" disabled="@variant.Deleted"></InputNumber>
+                            </div>
+                            <div class="col">
+                                <InputNumber type="number" @bind-Value="variant.OriginalPrice" class="form-control" disabled="@variant.Deleted"></InputNumber>
+                            </div>
+                            <div class="col col-visible">
+                                <InputCheckbox type="checkbox" @bind-Value="variant.Visible" disabled="@variant.Deleted"></InputCheckbox>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-primary btn-sm" disabled="@variant.Deleted" @onclick="@(() => RemoveVariant(variant.ProductTypeId))">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    <button type="button" class="btn btn-primary btn-sm" @onclick="AddVariant">
+                        <i class="oi oi-plus"></i> Add Variant
+                    </button>
+                </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <InputSelect id="category" @bind-Value="product.CategoryId" class="form-select">
+                        @foreach (var category in CategoryService.AdminCategories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="form-check">
+                    <InputCheckbox id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
+                    <label for="featured" class="form-check-label">Featured</label>
+                </div>
+                <div class="form-check">
+                    <InputCheckbox id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
+                    <label for="visible" class="form-check-label">Visible</label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">@btnText</button>
+                <ValidationSummary></ValidationSummary>
+            </EditForm>
+            @if (!product.IsNew)
+            {
+                <button type="button" class="btn btn-danger mb-2" @onclick="DeleteProduct">
+                    Delete Product
+                </button>
+            }
+        </div>
     }
 </div>
 

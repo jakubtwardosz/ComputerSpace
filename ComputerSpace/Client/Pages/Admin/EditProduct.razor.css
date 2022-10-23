@@ -1,0 +1,9 @@
+﻿.edit-product-image {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+.edit-product-image img {
+    width: 200px;
+}
