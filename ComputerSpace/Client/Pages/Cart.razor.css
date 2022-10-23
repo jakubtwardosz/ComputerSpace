@@ -1,4 +1,8 @@
-﻿.input-quantity {
+﻿.cart-product-image{
+    width: 120px;
+}
+
+.input-quantity {
     border-radius: 4px;
     border-color: rgb(189 189 189);
     border: 1px solid;
