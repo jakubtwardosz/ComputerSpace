@@ -15,5 +15,9 @@ namespace ComputerSpace.Shared
         public DateTime DateCreated { get; set; } = DateTime.Now;
         public Address Address { get; set; }
         public string Role { get; set; } = "Customer";
+        public string? VerificationToken { get; set; }
+        public DateTime? VerifiedAt { get; set; }
+        public string? PasswordResetToken { get; set; }
+        public DateTime? ResetTokenExpires { get; set; }
     }
 }
