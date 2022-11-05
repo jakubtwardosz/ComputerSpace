@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -65,7 +66,7 @@ namespace ComputerSpace.Server.Services.AuthService
 
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            
+
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
@@ -75,6 +76,25 @@ namespace ComputerSpace.Server.Services.AuthService
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<int> { Data = user.Id, Message = "Registration successful!" };
+        }
+
+        public async Task<ServiceResponse<bool>> VerifyUser(string token)
+        { 
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
+
+            if (user == null)
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = "Invalid token."
+                };
+            }
+
+            user.VerifiedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<bool> { Data = true, Message = "User verified." };
         }
 
         public async Task<bool> UserExists(string email)

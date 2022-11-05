@@ -47,6 +47,20 @@ namespace ComputerSpace.Server.Controllers
             return Ok(response);
         }
 
+        [HttpPost("verify")]
+        public async Task<ActionResult<ServiceResponse<string>>> Verify(string token)
+        {
+
+            var response = await _authService.VerifyUser(token);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
         [HttpPost("change-password"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword)
         {
