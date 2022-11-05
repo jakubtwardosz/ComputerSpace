@@ -39,6 +39,11 @@ namespace ComputerSpace.Server.Services.AuthService
                 response.Success = false;
                 response.Message = "Wrong password.";
             }
+            else if (user.VerifiedAt == null)
+            {
+                response.Success = false;
+                response.Message = "User not verified.";
+            }
             else
             {
                 response.Data = CreateToken(user);
