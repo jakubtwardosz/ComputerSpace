@@ -15,5 +15,9 @@ namespace ComputerSpace.Shared
         public string Password { get; set; } = string.Empty;
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string ConfirmPassword { get; set; } = string.Empty;
+        public string? VerificationToken { get; set; }
+        public DateTime? VerifiedAt { get; set; }
+
+
     }
 }

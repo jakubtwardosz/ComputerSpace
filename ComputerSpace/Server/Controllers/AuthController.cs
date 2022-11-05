@@ -22,7 +22,7 @@ namespace ComputerSpace.Server.Controllers
             var response = await _authService.Register(
                 new User
                 {
-                    Email = request.Email,
+                    Email = request.Email
                 },
                 request.Password);
 

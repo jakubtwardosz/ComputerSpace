@@ -60,8 +60,11 @@ namespace ComputerSpace.Server.Services.AuthService
 
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+
+            user.VerificationToken = CreateRandomToken();
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -148,6 +151,11 @@ namespace ComputerSpace.Server.Services.AuthService
         public async Task<User> GetUserByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+        }
+
+        private string CreateRandomToken()
+        {
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
         }
     }
 }
