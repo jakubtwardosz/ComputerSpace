@@ -1,4 +1,6 @@
-﻿namespace ComputerSpace.Server.Services.AuthService
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace ComputerSpace.Server.Services.AuthService
 {
     public interface IAuthService
     {
@@ -10,5 +12,7 @@
         string GetUserEmail();
         Task<User> GetUserByEmail(string email);
         Task<ServiceResponse<bool>> VerifyUser(string token);
+        Task<ServiceResponse<bool>> ForgotPassword(string email);
+        Task<ServiceResponse<bool>> ResetPassword(UserResetPassword request);
     }
 }

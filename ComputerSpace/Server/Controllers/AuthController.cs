@@ -61,6 +61,34 @@ namespace ComputerSpace.Server.Controllers
             return Ok(response);
         }
 
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult<ServiceResponse<string>>> ForgotPassword(string email)
+        {
+
+            var response = await _authService.ForgotPassword(email);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<ActionResult<ServiceResponse<string>>> ResetPassword(UserResetPassword request)
+        {
+
+            var response = await _authService.ResetPassword(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
         [HttpPost("change-password"), Authorize]
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword([FromBody] string newPassword)
         {
