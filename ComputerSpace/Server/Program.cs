@@ -9,9 +9,11 @@ global using ComputerSpace.Server.Services.OrderService;
 global using ComputerSpace.Server.Services.PaymentService;
 global using ComputerSpace.Server.Services.AddressService;
 global using ComputerSpace.Server.Services.ProductTypeService;
+global using ComputerSpace.Server.Services.EmailService;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
