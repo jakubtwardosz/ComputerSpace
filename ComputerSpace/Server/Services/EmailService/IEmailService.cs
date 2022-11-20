@@ -3,7 +3,6 @@
     public interface IEmailService
     {
         void SendEmail(Email request);
-
-
+        void SendVerificationEmail(string Email, string Token);
     }
 }

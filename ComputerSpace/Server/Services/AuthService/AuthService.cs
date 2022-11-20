@@ -11,14 +11,17 @@ namespace ComputerSpace.Server.Services.AuthService
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailService _emailService;
 
         public AuthService(DataContext context,
             IConfiguration configuration,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IEmailService emailService)
         {
             _context = context;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _emailService = emailService;
         }
 
         public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -71,6 +74,9 @@ namespace ComputerSpace.Server.Services.AuthService
             user.PasswordSalt = passwordSalt;
 
             user.VerificationToken = CreateRandomToken();
+
+
+            _emailService.SendVerificationEmail(user.Email, user.VerificationToken);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
