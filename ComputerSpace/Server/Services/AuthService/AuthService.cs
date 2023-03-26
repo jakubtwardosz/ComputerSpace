@@ -43,15 +43,18 @@ namespace ComputerSpace.Server.Services.AuthService
                 response.Success = false;
                 response.Message = "Wrong password.";
             }
-            else if (user.VerifiedAt == null)
-            {
-                response.Success = false;
-                response.Message = "User not verified.";
-            }
             else
             {
                 response.Data = CreateToken(user);
             }
+
+            /*  Auth failed:
+             *  else if (user.VerifiedAt == null)
+             *  {
+             *      response.Success = false;
+             *      response.Message = "User not verified.";
+             *  }
+             */  
 
             return response;
         }
@@ -75,9 +78,9 @@ namespace ComputerSpace.Server.Services.AuthService
 
             user.VerificationToken = CreateRandomToken();
 
-
-            _emailService.SendVerificationEmail(user.Email, user.VerificationToken);
-
+            /*  500: Internal Server Error:
+             *      _emailService.SendVerificationEmail(user.Email, user.VerificationToken);
+             */
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
