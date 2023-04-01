@@ -1,18 +1,17 @@
-global using ComputerSpace.Shared;
-global using System.Net.Http.Json;
-global using ComputerSpace.Client.Services.ProductService;
-global using ComputerSpace.Client.Services.CategoryService;
-global using ComputerSpace.Client.Services.AuthService;
-global using ComputerSpace.Client.Services.OrderService;
 global using ComputerSpace.Client.Services.AddressService;
+global using ComputerSpace.Client.Services.AuthService;
+global using ComputerSpace.Client.Services.CategoryService;
+global using ComputerSpace.Client.Services.OrderService;
+global using ComputerSpace.Client.Services.ProductService;
 global using ComputerSpace.Client.Services.ProductTypeService;
+global using ComputerSpace.Shared;
 global using Microsoft.AspNetCore.Components.Authorization;
-
+global using System.Net.Http.Json;
+using Blazored.LocalStorage;
 using ComputerSpace.Client;
+using ComputerSpace.Client.Services.CartService;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Blazored.LocalStorage;
-using ComputerSpace.Client.Services.CartService;
 
 
 

@@ -1,9 +1,4 @@
-﻿using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MimeKit;
-using MimeKit.Text;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ComputerSpace.Server.Controllers
 {

@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace ComputerSpace.Server.Services.OrderService
+﻿namespace ComputerSpace.Server.Services.OrderService
 {
     public class OrderService : IOrderService
     {

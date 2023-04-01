@@ -79,7 +79,7 @@ namespace ComputerSpace.Client.Services.CartService
                 var cartItems = await _localStorage.GetItemAsync<List<CartItem>>("cart");
                 if (cartItems == null)
                     return new List<CartProductResponse>();
-                
+
                 var response = await _http.PostAsJsonAsync("api/cart/products", cartItems);
                 var cartProducts =
                     await response.Content.ReadFromJsonAsync<ServiceResponse<List<CartProductResponse>>>();
@@ -110,7 +110,7 @@ namespace ComputerSpace.Client.Services.CartService
                 {
                     cart.Remove(cartItem);
                     await _localStorage.SetItemAsync("cart", cart);
-                    
+
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace ComputerSpace.Client.Services.CartService
 
             await _http.PostAsJsonAsync("api/cart", localCart);
 
-            if(emptyLocalCart)
+            if (emptyLocalCart)
             {
                 await _localStorage.RemoveItemAsync("cart");
             }
@@ -160,7 +160,7 @@ namespace ComputerSpace.Client.Services.CartService
                     cartItem.Quantity = product.Quantity;
                     await _localStorage.SetItemAsync("cart", cart);
                 }
-            }            
+            }
         }
     }
 }

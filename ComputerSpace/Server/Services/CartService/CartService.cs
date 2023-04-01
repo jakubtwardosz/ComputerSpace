@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace ComputerSpace.Server.Services.CartService
+﻿namespace ComputerSpace.Server.Services.CartService
 {
     public class CartService : ICartService
     {
@@ -36,8 +34,8 @@ namespace ComputerSpace.Server.Services.CartService
                         && v.ProductTypeId == item.ProductTypeId)
                     .Include(v => v.ProductType)
                     .FirstOrDefaultAsync();
-                
-                if(productVariant == null)
+
+                if (productVariant == null)
                 {
                     continue;
                 }
@@ -91,7 +89,7 @@ namespace ComputerSpace.Server.Services.CartService
                 .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
                 ci.ProductTypeId == cartItem.ProductTypeId &&
                 ci.UserId == cartItem.UserId);
-            if(sameItem == null)
+            if (sameItem == null)
             {
                 _context.CartItems.Add(cartItem);
             }

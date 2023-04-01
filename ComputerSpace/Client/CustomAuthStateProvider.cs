@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
@@ -24,13 +23,14 @@ namespace ComputerSpace.Client
             var identity = new ClaimsIdentity();
             _http.DefaultRequestHeaders.Authorization = null;
 
-            if(!string.IsNullOrEmpty(authToken))
+            if (!string.IsNullOrEmpty(authToken))
             {
                 try
                 {
                     identity = new ClaimsIdentity(ParseClaimsFromJwt(authToken), "jwt");
                     _http.DefaultRequestHeaders.Authorization =
-                        new AuthenticationHeaderValue("Bearer", authToken.Replace("\"",""));                }
+                        new AuthenticationHeaderValue("Bearer", authToken.Replace("\"", ""));
+                }
                 catch
                 {
                     await _localStorageService.RemoveItemAsync("authToken");

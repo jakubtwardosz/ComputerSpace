@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -48,14 +47,6 @@ namespace ComputerSpace.Server.Services.AuthService
                 response.Data = CreateToken(user);
             }
 
-            /*  Auth failed:
-             *  else if (user.VerifiedAt == null)
-             *  {
-             *      response.Success = false;
-             *      response.Message = "User not verified.";
-             *  }
-             */  
-
             return response;
         }
 
@@ -88,7 +79,7 @@ namespace ComputerSpace.Server.Services.AuthService
         }
 
         public async Task<ServiceResponse<bool>> VerifyUser(string token)
-        { 
+        {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.VerificationToken == token);
 
             if (user == null)

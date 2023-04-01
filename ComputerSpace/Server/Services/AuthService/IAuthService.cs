@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace ComputerSpace.Server.Services.AuthService
+﻿namespace ComputerSpace.Server.Services.AuthService
 {
     public interface IAuthService
     {

@@ -21,7 +21,7 @@
         public async Task<ServiceResponse<List<Category>>> DeleteCategory(int id)
         {
             Category category = await GetCategoryById(id);
-            if(category == null)
+            if (category == null)
             {
                 return new ServiceResponse<List<Category>>
                 {
@@ -68,7 +68,7 @@
         public async Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
         {
             var dbCategory = await GetCategoryById(category.Id);
-            if(dbCategory == null)
+            if (dbCategory == null)
             {
                 return new ServiceResponse<List<Category>>
                 {

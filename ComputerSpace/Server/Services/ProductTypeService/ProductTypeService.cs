@@ -33,7 +33,7 @@
                 {
                     Success = false,
                     Message = "Product Type not found."
-                };                
+                };
             }
 
             dbProductType.Name = productType.Name;
@@ -43,4 +43,3 @@
         }
     }
 }
- 

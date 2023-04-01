@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -39,7 +38,7 @@ namespace ComputerSpace.Server.Controllers
         {
             var response = await _authService.Login(request.Email, request.Password);
 
-            if(!response.Success)
+            if (!response.Success)
             {
                 return BadRequest(response);
             }
@@ -99,7 +98,7 @@ namespace ComputerSpace.Server.Controllers
             {
                 return BadRequest(response);
             }
-            
+
             return Ok(response);
         }
 

@@ -1,16 +1,15 @@
-global using ComputerSpace.Shared;
 global using ComputerSpace.Server.Data;
-global using Microsoft.EntityFrameworkCore;
-global using ComputerSpace.Server.Services.ProductService;
-global using ComputerSpace.Server.Services.CategoryService;
-global using ComputerSpace.Server.Services.CartService;
+global using ComputerSpace.Server.Services.AddressService;
 global using ComputerSpace.Server.Services.AuthService;
+global using ComputerSpace.Server.Services.CartService;
+global using ComputerSpace.Server.Services.CategoryService;
+global using ComputerSpace.Server.Services.EmailService;
 global using ComputerSpace.Server.Services.OrderService;
 global using ComputerSpace.Server.Services.PaymentService;
-global using ComputerSpace.Server.Services.AddressService;
+global using ComputerSpace.Server.Services.ProductService;
 global using ComputerSpace.Server.Services.ProductTypeService;
-global using ComputerSpace.Server.Services.EmailService;
-using Microsoft.AspNetCore.ResponseCompression;
+global using ComputerSpace.Shared;
+global using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
