@@ -20,22 +20,27 @@
                     <span>Image slider</span>
                 }
             </div>
-            <div class="col-md-6">
-                <div class="ps-lg-10 mt-6 mt-md-0">
-                    <h2 class="mb-1">@product.Title</h2>
+            <div class="col-md-6 my-lg-auto">
+                    <h3 class="mb-1">@product.Title</h3>
 
                     <div class="fs-5 mb-3">
                         @if (GetSelectedVariant() != null)
                         {
                             @if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
                             {
-                                <span class="fw-bold text-dark">
+                                <span class="text-muted">
                                     $@GetSelectedVariant().OriginalPrice
                                 </span>
+                                <span class="text-decoration-line-through text-muted">
+                                    $@GetSelectedVariant().Price
+                                </span>
                             }
-                            <span class="text-decoration-line-through text-muted">
-                                $@GetSelectedVariant().Price
-                            </span>
+                            else
+                            {
+                                <p class="text-muted">
+                                    $@GetSelectedVariant().Price
+                                </p>
+                            }
                         }
                     </div>
                     @if (product.Variants != null && product.Variants.Count > 1)
@@ -49,12 +54,11 @@
                             </select>
                         </div>
                     }
-                    <button @onclick="AddToCart" type="button" class="btn btn-primary">Add to cart</button>
-                    <hr class="my-6">
-                    <div class="mb-5">
-                        <p class="mb-0">@product.Description</p>
+                    <div>
+                        <p>@product.Description</p>
                     </div>
-                </div>
+
+                    <button @onclick="AddToCart" type="button" class="btn btn-primary">Add to cart</button>
             </div>
         }
     </div>    

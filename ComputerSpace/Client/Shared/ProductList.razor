@@ -7,10 +7,15 @@
     }
     else
     {
-        <div class="row g-4 row-cols-1 my-3">
+        <div class="row">
+            <div class="col-lg-3">
+                <p>Product filters - work in progress</p>
+            </div>
+            <div class="col-lg-9">
+
             @foreach (var product in ProductService.Products)
             {
-                <div class="col">
+                <div class="col mb-4">
                     <div class="card card-product">
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -43,6 +48,7 @@
                     </div>
                 </div>
             }
+            </div>
         </div>
 
         <nav>
